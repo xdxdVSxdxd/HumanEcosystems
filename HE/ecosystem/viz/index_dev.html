@@ -1,0 +1,593 @@
+<html>
+<head>
+		<!-- Facebook Metadata /-->
+		<meta property="fb:page_id" content="79403465956" />
+		<meta property="og:image" content="http://artisopensource.net/projects/human-ecosystems-img.png" />
+		<meta property="og:description" content="The real-time cultural ecosystem of the city of Rome"/>
+		<meta property="og:type" content="blog" />
+		<meta property="og:title" content="EC(m1) - Ecosistema Cultura | AOS" />
+		<meta property="og:url" content="http://www.artisopensource.net/emc1/" />
+		<meta property="og:site_name" content="EC(m1) - Ecosistema Cultura | AOS" />
+		
+
+		<!-- Google+ Metadata /-->
+		<meta itemprop="name" content="EC(m1) - Ecosistema Cultura | AOS">
+		<meta itemprop="description" content="The real-time cultural ecosystem of the city of Rome">
+		<meta itemprop="image" content="http://artisopensource.net/projects/human-ecosystems-img.png">
+
+		<title>EC(m1) - Ecosistema Cultura | AOS</title>
+		<meta name="description" content="The real-time cultural ecosystem of the city of Rome" />
+		<meta name="keywords" content="art is open source, aos, cities, smart cities, ubiquitous technologies, sensors, smart communities, urban screens, realtime cities, urban anthropology" />
+
+	<style>
+		html,body{
+			width: 100%;
+			height: 100%;
+			background: #000000;
+			color: #FFFFFF;
+			margin: 0px;
+			padding: 0px;
+		}
+		#emc1container{
+			position: relative;
+			z-index: 200;
+			width: 100%;
+			height: 100%;
+			background: #000000;
+			color: #FFFFFF;
+			margin: 0px;
+			padding: 0px;
+		}
+		#classescontainer{
+			position: absolute;
+			z-index: 900;
+			background: transparent;
+			color: #FFFFFF;
+			top: 5px;
+			left: 5px;
+			width: 200px;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		#navContainer{
+			position: absolute;
+			z-index: 900;
+			background: transparent;
+			color: #FFFFFF;
+			top: 5px;
+			right: 5px;
+			width: 200px;
+			padding: 0px;
+			margin: 0px;	
+		}
+		#navContainer a, #navContainer a:visited{
+			display: block;
+			margin: 0px;
+			padding: 0px;
+			margin-bottom: 6px;
+			width: 200px;
+		}
+		.legendBox{
+			width: 200px;
+			min-width: 200px;
+			max-width: 200px;
+			overflow: hidden;
+			padding: 0px;
+			margin: 0px;
+			background: inherit;
+			float: left;
+		}
+		.legendcolor{
+			background: inherit;
+			width: 20px;
+			height: 20px;
+			min-width: 20px;
+			min-height: 20px;
+			max-width: 20px;
+			max-height: 20px;
+			overflow: hidden;
+			float: left;
+			padding: 0px;
+			margin: 5px;
+		}
+		.legendname{
+			background: inherit;
+			width: 160px;
+			height: 20px;
+			min-width: 160px;
+			min-height: 20px;
+			max-width: 160px;
+			max-height: 20px;
+			overflow: hidden;
+			float: left;
+			padding: 5px;
+			margin: 0px;
+			font: 12px Helvetica,Arial,sans-serif;
+		}
+		.legendname a,.legendname a:visited{
+			text-decoration: none;
+			color: #009000;
+			font: 12px Helvetica,Arial,sans-serif;
+		}
+		.legendname a:hover,.legendname a:active{
+			color: #00FF00;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div id="emc1container"></div>
+	<div id="classescontainer"></div>
+	<div id="navContainer">
+		<a href='index.html' title='ECM(1)'>
+			<img src='img/logo.png' title='ECM(1)' />
+		</a>
+		<a href='index.html' title='Space'>
+			<img src='img/space.png' title='Go to Space Interface' />
+		</a>
+		<a href='time.html' title='Time'>
+			<img src='img/time.png' title='Go to Time Interface' />
+		</a>
+		<a href='relations.html' title='Relations'>
+			<img src='img/relations.png' title='Go to Relations Interface' />
+		</a>
+	</div>
+
+
+	<script src="js/three.min.js"></script>
+	<script src="js/controls/OrbitControls.js"></script>
+	<script src="js/tween.min.js"></script>
+	<script src="js/jquery-2.0.3.min.js"></script>
+    <script>
+
+    var classes,classesPS;
+
+    var renderer,scene,camera,controls;
+
+    var centerLat = 41.8947400;
+	var centerLon = 12.4839000;
+
+	var 	mLat = 42.02071159613375,
+			mLon = 12.311116623046928,
+			MLat = 41.76514476158199,
+			MLon = 12.654439376953178;
+
+	var dlat = mLat - MLat;
+	var dlon = MLon - mLon;
+
+	var minZForParticles = 200;
+ 
+    var WIDTH = window.innerWidth,
+		  HEIGHT = window.innerHeight;
+
+		var mapWidth = 2000;
+		var mapHeight = 2000;
+
+		// set some camera attributes
+		var VIEW_ANGLE = 45,
+		  ASPECT = WIDTH / HEIGHT,
+		  NEAR = 0.1,
+		  FAR = 10000;
+
+		  var $container;
+		  var italiaMaterial,italiaMaterial2;
+
+		  var widthSegments = 250,
+			heightSegments = 250;
+		var italia,italia2;
+
+
+
+	var cameraP1X = 0;
+	var cameraP1Y = 200;
+	var cameraP2X = 0;
+	var cameraP2Y = -500;
+	var timeTween = 15000;
+
+	var mapTween1,mapTween2;
+
+	var linesMesh,lineMaterial;
+
+
+	var skyboxMesh,classesMesh, spotLight,directionalLight;
+
+function loadTexture(url) {
+    var image = new Image();
+    var texture = new THREE.Texture(image);
+    image.onload = function() {
+        texture.needsUpdate = true;
+        console.log("texture " + url + " loaded");
+    };
+    image.src = url;
+    return texture;
+}
+
+
+    $( document ).ready(function() {
+
+
+    	
+		// get the DOM element to attach to
+		// - assume we've got jQuery to hand
+		$container = $('#emc1container');
+
+		// create a WebGL renderer, camera
+		// and a scene
+		renderer = new THREE.WebGLRenderer();
+		renderer.shadowMapEnabled = true;
+		renderer.shadowMapSoft = true;
+
+		camera =
+		  new THREE.PerspectiveCamera(
+		    VIEW_ANGLE,
+		    ASPECT,
+		    NEAR,
+		    FAR);
+
+		camera.rotation.x = 0;//Math.PI/7.0;
+		camera.position.y = 0;
+
+
+
+		controls = new THREE.OrbitControls( camera , renderer.domElement );
+		//controls.addEventListener( 'change', render );
+
+		scene = new THREE.Scene();
+
+		// add the camera to the scene
+		scene.add(camera);
+
+		/*
+
+		// load the cube textures
+		var urlPrefix	= "img/skybox/";
+		var urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
+				urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
+				urlPrefix + "posz.jpg", urlPrefix + "negz.jpg" ];
+		var textureCube	= THREE.ImageUtils.loadTextureCube( urls );
+		
+		// init the cube shadder
+		var shader	= THREE.ShaderLib["cube"];
+		shader.uniforms[ "tCube" ].value = textureCube;
+		var skyMaterial = new THREE.ShaderMaterial( {
+		    fragmentShader: shader.fragmentShader,
+		    vertexShader: shader.vertexShader,
+		    uniforms: shader.uniforms,
+		    depthWrite: false,
+		    side: THREE.BackSide
+		} );
+		var skyBox = new THREE.Mesh( new THREE.CubeGeometry( 9000, 9000, 9000, 1, 1, 1, null, true ), skyMaterial );
+		scene.add( skyBox );
+
+		*/
+
+
+		// the camera starts at 0,0,0
+		// so pull it back
+		camera.position.z = 1000;
+
+		// start the renderer
+		renderer.setSize(WIDTH, HEIGHT);
+
+		// attach the render-supplied DOM element
+		$container.append(renderer.domElement);
+
+		lineMaterial = new THREE.LineBasicMaterial(
+				{
+					color: 0x444444,
+					linewidth: 1,
+					linecap: "square",
+					opacity: 0.3
+				}
+			);
+
+		linesMesh = new THREE.Object3D();
+		scene.add(linesMesh);
+
+		classesMesh = new THREE.Object3D();
+		scene.add(classesMesh);
+		classesMesh.visible = true;
+
+		classesPS = new Array();
+		$.getJSON("getClasses.php",{},function(data){
+			//console.log(data);
+			classes = data;
+
+			for(var i = 0; i<data.length; i++){
+
+				var cbox = "<div class='legendBox'>";
+				cbox = cbox + "<div class='legendcolor' style='background:#" + data[i].color.substring(2)  +  "'></div>";
+				cbox = cbox + "<div class='legendname' >" + data[i].name  +  "</div>";
+				cbox = cbox + "</div>";
+
+				$("#classescontainer").append(cbox);
+
+				var pMaterial =
+			      new THREE.ParticleBasicMaterial({
+			        color: parseInt(data[i].color,16),
+			        size: 20,
+			        transparent: true,
+			        opacity: 0.7
+			      });
+
+				var PS = new THREE.ParticleSystem(
+				    new THREE.Geometry(),
+				    pMaterial
+				);
+
+				classesPS.push( PS );
+
+				classesMesh.add( PS );
+
+			}
+			italia.geometry.verticesNeedUpdate = true;
+
+			var cbox = "<div class='legendBox'>";
+			cbox = cbox + "<div class='legendcolor'></div>";
+			cbox = cbox + "<div class='legendname' ><a href='javascript:resetCamera();'>Reset Camera</a></div>";
+			cbox = cbox + "</div>";
+
+			$("#classescontainer").append(cbox);
+
+			cbox = "<div class='legendBox'>";
+			cbox = cbox + "<div class='legendcolor'></div>";
+			cbox = cbox + "<div class='legendname' ><a href='javascript:toggleIntensity();'>Intensity ON/OFF</a></div>";
+			cbox = cbox + "</div>";
+
+			$("#classescontainer").append(cbox);
+
+		});
+
+
+		
+
+		//console.log(  renderer.context.getParameter(renderer.context.MAX_TEXTURE_SIZE)  );
+
+		italiaMaterial =
+		  //new THREE.MeshBasicMaterial(
+		  new THREE.MeshLambertMaterial(
+		  	{
+		      color: 0xFFFFFF,
+		      opacity: 1,
+		      map: THREE.ImageUtils.loadTexture( "img/roma_small.png" , {}, function(){ italia.material.map.needsUpdate = true; })
+			}	
+		);
+
+		italiaMaterial2 = new THREE.MeshBasicMaterial( { color: 0x008000, wireframe: true, transparent: true, opacity: 0.3 } ); 
+
+
+
+		
+		// create a new mesh with
+		// sphere geometry - we will cover
+		// the sphereMaterial next!
+		italia = new THREE.Mesh(
+		  new THREE.PlaneGeometry(mapWidth, mapHeight, widthSegments, heightSegments),
+		  italiaMaterial
+		);
+		italia.castShadow = true;
+		italia.receiveShadow = true;
+		italia.dynamic = true;
+
+
+		italia2 = new THREE.Mesh(
+		  new THREE.PlaneGeometry(mapWidth, mapHeight, widthSegments, heightSegments),
+		  italiaMaterial
+		);
+		italia2.position.z = 0;
+		italia2.castShadow = true;
+		italia2.receiveShadow = true;
+		italia2.visible=false;
+		italia2.dynamic = true;
+
+		
+
+		// add the sphere to the scene
+		scene.add(italia);
+		scene.add(italia2);
+
+		
+	
+		
+		
+		/*
+		directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+		directionalLight.position.set( 0, 0.5, 0 );
+		directionalLight.castShadow = true;
+		//directionalLight.shadowCameraVisible = true;
+		*/
+		directionalLight = new THREE.PointLight( 0xFFFFFF, 2, 3000 );
+		directionalLight.position.set(0,0,2000);
+		scene.add( directionalLight );
+		
+
+
+
+		spotLight = new THREE.SpotLight(0xFF0000, 2, 2000, Math.PI/2.0);
+		spotLight.position.set( 0, 0, 1000 );
+		spotLight.castShadow = true;
+		spotLight.shadowCameraVisible = false;
+		spotLight.shadowMapWidth = 1024;
+		spotLight.shadowMapHeight = 1024;
+		spotLight.shadowCameraNear = 1000;
+		spotLight.shadowCameraFar = 2000;
+		spotLight.shadowCameraFov = 30;
+		spotLight.visible = false;
+		scene.add( spotLight );
+
+
+		requestAnimationFrame(render);
+
+	
+
+		$.getJSON("getContentForMap.php",{},function(data){
+			//console.log(data);
+			for(var i = 0; i<data.length; i++){
+				//console.log(  parseFloat(data[i].lat) + "," + parseFloat(data[i].lng) + "-->" + parseFloat(data[i].c));
+				augment(parseFloat(data[i].lat),parseFloat(data[i].lng),parseFloat(data[i].c)*10,data[i].name,data[i].c);
+
+
+			}
+			italia2.geometry.verticesNeedUpdate = true;
+
+			for(var j = 0; j<classes.length ; j++ ){
+				//classesPS[j].geometry.verticesNeedUpdate = true;
+				classesPS[j].geometry.__dirtyVertices = true;
+			}
+
+		});
+
+
+		camera.position.x = cameraP1X;
+		camera.position.y = cameraP1Y;
+		
+
+		/*
+
+		var p1 = {x: cameraP1X, y: cameraP1Y};
+		var p2 = {x: cameraP2X, y: cameraP2Y};
+		mapTween1 = new TWEEN.Tween(camera.position).to({x: cameraP2X, y: cameraP2Y},timeTween);
+		mapTween2 = new TWEEN.Tween(camera.position).to({x: cameraP1X, y: cameraP1Y},timeTween);
+
+		
+		mapTween1.easing(TWEEN.Easing.Quadratic.InOut);
+		mapTween2.easing(TWEEN.Easing.Quadratic.InOut);
+
+		mapTween1.chain(mapTween2);
+		mapTween2.chain(mapTween1);
+
+		mapTween1.start();
+
+		*/
+
+    });
+
+	function resetCamera(){
+		camera.rotation.x = 0;
+		camera.rotation.y = 0;
+		camera.rotation.z = 0;
+		camera.position.x = 0;
+		camera.position.y = 0;
+		camera.position.z = 1000;
+	}
+
+	function toggleIntensity(){
+		italia2.visible=!italia2.visible;
+		italia.visible=!italia.visible;
+		spotLight.visible = !spotLight.visible;
+		var zz = 0;
+		if(italia2.visible){
+			zz = 1000;
+		}
+		for(var i=0; i<classesMesh.children.length; i++){
+			for(var j=0; j<classesMesh.children[i].children.length; j++){
+				classesMesh.children[i].children[j].visible=!classesMesh.children[i].children[j].visible;
+				//new TWEEN.Tween(classesMesh.children[i].children[j].position.z).to(zz,1000).start();
+			}
+		}
+
+		
+	}
+
+	function augment(lat,lng,amt,cl,c){
+
+		
+		var oLat = lat - MLat;
+		var oLon = lng - mLon;
+
+		var pLat = Math.round( heightSegments - heightSegments * oLat / dlat );
+		var pLon = Math.round( widthSegments * oLon / dlon );
+
+		
+		if(pLat>=0 && pLat<heightSegments && pLon>=0 && pLon<widthSegments){
+			
+			
+			italia2.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].z = italia2.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].z + amt;
+			italia2.geometry.vertices[ pLon+1 + pLat*(widthSegments+1)  ].z = italia2.geometry.vertices[ pLon+1 + pLat*(widthSegments+1)  ].z + amt;
+			italia2.geometry.vertices[ pLon+1 + (pLat+1)*(widthSegments+1)  ].z = italia2.geometry.vertices[ pLon+1 + (pLat+1)*(widthSegments+1)  ].z + amt;
+			italia2.geometry.vertices[ pLon + (pLat+1)*(widthSegments+1)  ].z = italia2.geometry.vertices[ pLon + (pLat+1)*(widthSegments+1)  ].z + amt;
+			
+			
+				var zz = 0;//minZForParticles;
+				for(var j = 0; j<classes.length ; j++ ){
+
+					if(cl==classes[j].name){
+
+						var particle = 
+					        new THREE.Vector3(
+					        	italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].x, 
+					        	italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].y, 
+					        	zz
+					        )
+					    ;
+
+						//classesPS[j].geometry.vertices.push( particle );
+						var mm = new THREE.Mesh(
+								new THREE.CubeGeometry(c*2, c*2, c*2, 1, 1, 1),
+								//new THREE.SphereGeometry(c*5, 20, 20),
+								classesPS[j].material
+							);
+						mm.position = {
+							x: italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].x, 
+					        y: italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].y, 
+					        z: zz
+						};
+
+						classesPS[j].add(
+							mm
+						);
+
+
+						/*
+						
+						var Gline = new THREE.Geometry();
+						Gline.vertices.push( new THREE.Vector3( 
+														italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].x,  
+														italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].y, 
+														0
+												) 
+						);
+						Gline.vertices.push( new THREE.Vector3( 
+														italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].x,  
+														italia.geometry.vertices[ pLon + pLat*(widthSegments+1)  ].y, 
+														zz
+												) 
+						);
+						var line = new THREE.Line( Gline, lineMaterial, THREE.LinePieces );
+						linesMesh.add(
+							line
+						);
+						linesMesh.needsUpdate = true;
+
+						*/
+						
+					}
+
+					//zz += 20;
+
+				}
+
+			//italia.geometry.vertices[ pLon  + 0*(widthSegments+1) ].z = italia.geometry.vertices[ pLon  + 0*(widthSegments+1) ].z + amt;
+		}
+
+
+
+	}
+
+	
+
+	function render(){
+	  requestAnimationFrame(render);
+
+	  controls.update();
+	  TWEEN.update();
+
+	  
+	  renderer.render(scene, camera);
+	};
+ 
+    </script>
+</body>
+</html>

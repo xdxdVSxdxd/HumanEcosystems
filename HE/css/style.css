@@ -180,3 +180,79 @@ a.footer-link:hover{
 		.legendname a:hover,.legendname a:active{
 			color: #00FF00;
 		}
+
+
+		div.bargraphbar{
+			display: inline-block;
+		    width: 4px;
+		    height: 75px;   /* We'll override this later */
+		    background-color: #AAAAAA;
+		    margin-right: 2px;
+		}
+
+		div.bargraphbar:hover{
+			background-color: #FF8000;
+		}
+
+		div.timelines{
+			margin: 0px;
+			margin-bottom: 20px;
+			padding: 20px;
+			height:100px;
+			width: 960px;
+		}
+
+		#emc1container h1{
+			margin-left: 20px;
+			margin-top: 20px;
+			color: #868D96;
+		}
+
+		#emc1container p{
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 12px;
+			color: #EEEEEE;
+			margin-left: 40px;
+			margin-right: 40px;
+		}
+
+		#emc1container p a, #emc1container p a:visited{
+			background: #868D96;
+			padding: 4px;
+			color: #FFFFFF;
+			text-decoration: none;
+			margin: 2px;
+		}
+
+		#emc1container p a:hover{
+			background: #FFFFFF;
+			color: #868D96;	
+		}
+
+		div#infobox{
+			position: absolute;
+			z-index: 9999;
+			bottom: 100px;
+			left: 0px;
+			width: 200px;
+			height: 100px;
+			overflow: hidden;
+			font: 10px Arial,Helvetica,sans-serif;
+			color: #AAAAAA;
+		}
+		div#infobox h1{
+			font-size: 12px;
+			margin: 0px;
+			margin-bottom: 4px;
+		}
+
+		div#infobox a, div#infobox a:visited{
+			font-size: 12px;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+		}
+
+		div#infobox a:hover{
+			color: #FF8000;
+		}

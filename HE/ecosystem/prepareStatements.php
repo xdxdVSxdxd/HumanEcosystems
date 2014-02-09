@@ -40,7 +40,7 @@ $q_rel7->bindParam(':c', $c);
 $q_rel7->bindParam(':w', $citycode);
 
 // users for relations
-$q_users = $dbh->prepare("SELECT u.id as id, u.id_social as id_social, u.nick as nick, u.profile_url as profile_url, u.image_url as image_url, u.source as source, count(*) as c FROM content co, users u WHERE co.city=:w AND co.nick=u.nick GROUP BY u.profile_url order by c desc");
+$q_users = $dbh->prepare("SELECT u.id as id, u.id_social as id_social, u.nick as nick, u.profile_url as profile_url, u.image_url as image_url, u.source as source, count(*) as c FROM content co, users u WHERE u.city=:w AND co.nick=u.nick GROUP BY u.nick order by c desc LIMIT 0,3000");
 $q_users->bindParam(':w', $citycode);
 
 // relations for relations
@@ -142,5 +142,14 @@ $q_insert_category_of_location->bindParam(':id_category', $id_category);
 $q_insert_category_of_location->bindParam(':id_location', $id_location);
 $q_insert_category_of_location->bindParam(':w', $citycode);
 
+
+// query for timeline
+$q_extract_timeline = $dbh->prepare("SELECT YEAR(t) as y , MONTH(t) as mo, DAY(t) as d, HOUR(t) as h, count(*) as c FROM (SELECT * FROM content WHERE city=:w AND t>DATE_SUB(NOW(),INTERVAL 2 DAY) ORDER BY t DESC ) a GROUP BY YEAR(t), MONTH(t), DAY(t), HOUR(t) ORDER BY y,mo,d,h");
+$q_extract_timeline->bindParam(':w', $citycode);
+
+
+$q_extract_timeline_class = $dbh->prepare("SELECT YEAR(t) as y , MONTH(t) as mo, DAY(t) as d, HOUR(t) as h, count(*) as c FROM (SELECT content.* FROM content, content_to_class WHERE content.city=:w AND content.t>DATE_SUB(NOW(),INTERVAL 2 DAY) AND content_to_class.id_content=content.id AND content_to_class.id_class=:c ORDER BY t DESC ) a GROUP BY YEAR(t), MONTH(t), DAY(t), HOUR(t) ORDER BY y,mo,d,h");
+$q_extract_timeline_class->bindParam(':w', $citycode);
+$q_extract_timeline_class->bindParam(':c', $classfilter);
 
 ?>

@@ -9,23 +9,45 @@ require_once ('codebird.php');
 $source = "TWIT";
 	
 
-\Codebird\Codebird::setConsumerKey('CONSUMER KEY', 'CONSUMER KEY'); // static, see 'Using multiple Codebird instances'
+\Codebird\Codebird::setConsumerKey('QItNKKw9TguAgnHyKVG11Q', '3J3kgnnymIYAsOCMSas4TyKPPFrzsdgc5zkNL67fEsU'); // static, see 'Using multiple Codebird instances'
 
 $cb = \Codebird\Codebird::getInstance();
 
-$cb->setToken('TOKEN', 'SECRET');
+$cb->setToken('15755206-ubKqRLYyJNUMLkSpRhBW6NAv7EoKqCpYv3X0ugSOA', 'UZZylp1eLFlWJK3PkQt8Rg7A6oRi6frFBdKjEre0fw');
  
 
-//$reply = $cb->oauth2_token();
-//$bearer_token = $reply->access_token;
+/*
+$reply = $cb->oauth2_token();
+$bearer_token = $reply->access_token;
 
-//echo($bearer_token);
+echo($bearer_token);
+*/
 
 
-\Codebird\Codebird::setBearerToken('BEARER TOKEN');
+\Codebird\Codebird::setBearerToken('AAAAAAAAAAAAAAAAAAAAALtcTAAAAAAAyuGXkNaQLQptKoE6WRumvuhVSOg%3DhO2N7Nq84J56rEP9uHBr2RfRmDbq0jQ4E46KhQfg');
+
+
+
 
 $query = "geocode=" . $mainLat . "," . $mainLng . ",6km&result_type=recent&count=100";
  
+
+if($mainLng==999 && $mainLng==999 && $words[0]["word"]!="*"){
+
+	$qq = "";
+	for($i=0 ; $i<count($words) ; $i++){
+		$qq = $qq . $words[$i]["word"];
+		if($i<count($words)-1){
+			$qq = $qq . " OR ";
+		}
+	}
+
+	$query = "q=" . $qq . "&result_type=recent&count=100";
+} else if($mainLng==999 && $mainLng==999 && $words[0]["word"]=="*"){
+	$query = "q=" . $citycode . "&result_type=recent&count=100";
+}
+
+//echo($query . "<br />");
 
 $result = $cb->search_tweets($query, true);
 
@@ -51,7 +73,7 @@ if(isset($result) && $result!=""){
 			else if( $status->text ){
 				//if( strpos(  strtoupper( $status["caption"]["text"] )   ,   strtoupper(  " " . $w["word"] )     ) !== false  ){
 
-				if(  preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )     ){
+				if(  preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )     ){
 					$h = array();
 					$h["idc"] = $w["id_class"];
 					$h["idw"] = $w["id_word"];
@@ -86,6 +108,12 @@ if(isset($result) && $result!=""){
 						// se non lo e':
 						//		controllo se c'e' l'user -->user_id
 						$user_id_social = $status->user->id_str;
+						$language = "";
+						if(isset($status->metadata) && isset($status->metadata->iso_language_code)){
+							$language = $status->metadata->iso_language_code;
+						} else if (isset($status->lang)){
+							$language = $status->lang;
+						}
 						if ($q_exist_user->execute()){
 							if($r2 = $q_exist_user->fetch()){
 								// c'e' gia'
@@ -138,6 +166,34 @@ if(isset($result) && $result!=""){
 						//print_r($id_content);
 						//echo("***<br /><br />");
 						//		memorizzo le relazioni con le keyword
+
+
+						if($status->entities){
+							
+							if($status->entities->user_mentions){
+								foreach ($status->entities->user_mentions as  $mention ) {
+									
+									$nick1 = $status->user->screen_name;
+									$nick2 = $mention->screen_name;
+
+									if ($q_rel5->execute()){
+
+										if($found = $q_rel5->fetch() ){
+											$c = $found["c"];
+											$id_rel = $found["id"];
+											$q_rel6->execute();
+										} else {
+											$c = 1;
+											$q_rel7->execute();
+										}
+
+									}
+
+								}
+							}
+
+						}//if($status->entities){
+
 						foreach ($holdFor as $ho) {
 							$id_class = $ho["idc"];
 							$id_word = $ho["idw"];
@@ -166,6 +222,8 @@ if(isset($result) && $result!=""){
 
 
 }//if(isset($fc) && $fc!=""){
+
+
 
 /*
 

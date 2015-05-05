@@ -7,17 +7,44 @@ require_once('prepareStatements.php');
 
 
 $source = "INSTA";
-	
 
-$url = "https://api.instagram.com/v1/media/search?lat=" . $mainLat . "&lng=" . $mainLng . "&distance=5000&client_id=CLIENT ID";
-$fc = file_get_contents($url);
+$url = array();
+	
+//$url = "https://api.instagram.com/v1/tags/" . $w["word"] . "/media/recent?client_id=b60d33ad3da0461dbe7e7bd898eee193";
+
+if($mainLng==999 && $mainLng==999){
+
+	
+	for($i=0 ; $i<count($words) ; $i++){
+		$qq = "https://api.instagram.com/v1/tags/";
+		$qq = $qq . str_replace(" ", "", $words[$i]["word"]) ;
+		$qq = $qq . "/media/recent?client_id=b60d33ad3da0461dbe7e7bd898eee193";
+		$url[] = $qq;
+	}
+
+} else {
+
+	$url[] = "https://api.instagram.com/v1/media/search?lat=" . $mainLat . "&lng=" . $mainLng . "&distance=5000&client_id=b60d33ad3da0461dbe7e7bd898eee193";
+
+}
+
+
+
+for($urlc = 0; $urlc<count($url) ; $urlc++){
+
+$fc = file_get_contents($url[$urlc]);
 if(isset($fc) && $fc!=""){
 	$js = json_decode($fc,true);
 					
 	//print_r($js);	
 	//echo("<br /><br />" . "<br /><br />");
 
+	//echo("quanti:" . count($js["data"]) . "<br /><br />");
+
 	for($i = 0; $i<count($js["data"]);$i++){
+
+		//echo("[1]:<br /><br />");
+
 		$holdFor = array();
 		//echo("Text:" . $js["data"][$i]["caption"]["text"] . "<br /><br />");
 		foreach ($words as $w) {
@@ -25,13 +52,15 @@ if(isset($fc) && $fc!=""){
 			if($js["data"][$i]["caption"] && $js["data"][$i]["caption"]["text"] ){
 				//if( strpos(  strtoupper( $js["data"][$i]["caption"]["text"] )   ,   strtoupper(  " " . $w["word"] )     ) !== false  ){
 
+				//echo("[" . $js["data"][$i]["caption"]["text"] . "]");
+
 				if($w["word"]=="*"){
 					$h = array();
 					$h["idc"] = $w["id_class"];
 					$h["idw"] = $w["id_word"];
 					$holdFor[] = $h;
 				}
-				else if(  preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"     , strtoupper( $js["data"][$i]["caption"]["text"] )   )     ){
+				else if(  preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"     , strtoupper( $js["data"][$i]["caption"]["text"] )   )  ||    preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"     , strtoupper( $js["data"][$i]["caption"]["text"] )   )    ){
 					$h = array();
 					$h["idc"] = $w["id_class"];
 					$h["idw"] = $w["id_word"];
@@ -48,6 +77,8 @@ if(isset($fc) && $fc!=""){
 
 		if(count($holdFor)>0){
 
+			//echo("lo tengo<br /><br />");
+
 			try
 			{
   				$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -55,6 +86,7 @@ if(isset($fc) && $fc!=""){
 
 				// controllo se il content e' presente
 				$id_social = $js["data"][$i]["id"];
+				$language = "";
 				if ($q_exist_content->execute()){
 					if($r1 = $q_exist_content->fetch()){
 						// c'e' gia'
@@ -135,6 +167,8 @@ if(isset($fc) && $fc!=""){
 
 
 }//if(isset($fc) && $fc!=""){
+
+}//for $urlc
 
 
 ?>

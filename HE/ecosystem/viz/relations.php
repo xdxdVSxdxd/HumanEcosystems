@@ -56,6 +56,12 @@
 		<a href='time.php?w=<?php echo($www); ?>' title='Time'>
 			TIME
 		</a>
+		<a href='voices.php?w=<?php echo($www); ?>' title='Voices'>
+			VOICES
+		</a>
+		<a href='timeline.php?w=<?php echo($www); ?>' title='TimeLine'>
+			TIMELINE
+		</a>
 		<a href='relations.php?w=<?php echo($www); ?>' title='Relations'>
 			RELATIONS
 		</a>
@@ -107,7 +113,8 @@
 	var attraction1to10, attraction10to20, attraction20tomax,attractions;
 
 	var steps = 70.0;
-	var delta = 40.0;
+	var delta = 500.0;
+	var deltarepulsion = 100.0;
 
 	//var steps2 = 380.0;
 	//var delta2 = 400.0;
@@ -235,6 +242,7 @@ function loadTexture(url) {
 
 			for(var i = 0; i<data.length; i++){
 				
+				/*
 				if(data[i].c<=15){
 
 					var vvv = new THREE.Mesh( new THREE.CubeGeometry(5, 5, 5,1,1,1) , gmat1);
@@ -281,6 +289,8 @@ function loadTexture(url) {
 
 				} else{
 
+				*/
+
 					var vvv = new THREE.Mesh( new THREE.CubeGeometry(15, 15, 15,1,1,1) , gmatmax);
 					vvv.position.x = Math.random() * 4000 - 2000;
 					vvv.position.y = Math.random() * 4000 - 2000;
@@ -292,8 +302,9 @@ function loadTexture(url) {
 					vvv.image_url=data[i].image_url;
 					vvv.source=data[i]["source"];
 					groupparticlesmax.add(vvv);
-
+				/*
 				}
+				*/
 				
 
 
@@ -420,6 +431,15 @@ function loadTexture(url) {
 							o.t = "max";	
 						}
 
+						o.vx = 0;
+						o.vy = 0;
+						o.vz = 0;
+
+						o.ax = 0;
+						o.ay = 0;
+						o.az = 0;
+
+
 						o.finished = false;
 						attractions.push(o);
 
@@ -512,9 +532,15 @@ function loadTexture(url) {
 
 
 
+	var smorzo = 1000;
+	var repulsion = 10;
+	var viscosity = 0.01;
+	var nrepulsions = 200;
+
 
 	function doAnims(){
-		if(attractions && groupparticles1 && groupparticles10 && groupparticles20 && groupparticlesmax){
+		if(attractions && groupparticles1 && groupparticles10 && groupparticles20 && groupparticlesmax)
+		{
 			for(var i = 0 ; i<(attractions.length-1); i++   ){
 
 				var vfrom, vto;
@@ -547,13 +573,102 @@ function loadTexture(url) {
 				var distance = Math.sqrt(  deltax*deltax + deltay*deltay + deltaz*deltaz  );
 
 				if( distance>delta ){
-					vfrom.x = vfrom.x + deltax/steps;
-					vfrom.y = vfrom.y + deltay/steps;
-					vfrom.z = vfrom.z + deltaz/steps;
 
-					vto.x = vto.x - deltax/steps;
-					vto.y = vto.y - deltay/steps;
-					vto.z = vto.z - deltaz/steps;
+					attractions[i].ax = attractions[i].ax + deltax/smorzo;
+					attractions[i].ay = attractions[i].ay + deltay/smorzo;
+					attractions[i].az = attractions[i].az + deltaz/smorzo;
+
+				}
+			}
+
+
+			for(var i = 0; i<nrepulsions; i++){
+
+				var idx1 = Math.floor((Math.random() * groupparticlesmax.children.length));
+				var idx2 = Math.floor((Math.random() * groupparticlesmax.children.length));
+
+				if(idx1!=idx2){
+
+					var vfrom = groupparticlesmax.children[ idx1 ].position;
+					var vto = groupparticlesmax.children[ idx2 ].position;
+
+					var deltax = ( vto.x - vfrom.x );
+					var deltay = ( vto.y - vfrom.y );
+					var deltaz = ( vto.z - vfrom.z );
+
+					var distance = Math.sqrt(  deltax*deltax + deltay*deltay + deltaz*deltaz  );
+
+					if( distance<deltarepulsion ){
+						vfrom.x = vfrom.x - deltax/repulsion;
+						vfrom.y = vfrom.y - deltay/repulsion;
+						vfrom.z = vfrom.z - deltaz/repulsion;
+
+						vto.x = vto.x + deltax/repulsion;
+						vto.y = vto.y + deltay/repulsion;
+						vto.z = vto.z + deltaz/repulsion;
+
+						groupparticlesmax.children[ idx1 ].position = vfrom;
+						groupparticlesmax.children[ idx2 ].position = vto;
+
+
+					}
+				}
+
+			}
+
+
+			for(var i = 0 ; i<(attractions.length-1); i++   ){
+
+				var vfrom, vto;
+				
+				if(attractions[i].f=="1"){
+					vfrom = groupparticles1.children[ attractions[i].from ].position;
+				} else if(attractions[i].f=="10"){
+					vfrom = groupparticles10.children[ attractions[i].from ].position;
+				} else if(attractions[i].f=="20"){
+					vfrom = groupparticles20.children[ attractions[i].from ].position;
+				} else if(attractions[i].f=="max"){
+					vfrom = groupparticlesmax.children[ attractions[i].from ].position;
+				}
+
+				if(attractions[i].t=="1"){
+					vto = groupparticles1.children[ attractions[i].to ].position;
+				} else if(attractions[i].t=="10"){
+					vto = groupparticles10.children[ attractions[i].to ].position;
+				} else if(attractions[i].t=="20"){
+					vto = groupparticles20.children[ attractions[i].to ].position;
+				} else if(attractions[i].t=="max"){
+					vto = groupparticlesmax.children[ attractions[i].to ].position;
+				}
+
+
+				attractions[i].ax = attractions[i].ax - attractions[i].ax*viscosity;
+				attractions[i].ay = attractions[i].ay - attractions[i].ay*viscosity;
+				attractions[i].az = attractions[i].az - attractions[i].az*viscosity;
+
+
+				attractions[i].vx = attractions[i].vx + attractions[i].ax;
+				attractions[i].vy = attractions[i].vy + attractions[i].ay;
+				attractions[i].vz = attractions[i].vz + attractions[i].az;
+
+				attractions[i].vx = attractions[i].vx - attractions[i].vx*viscosity;
+				attractions[i].vy = attractions[i].vy - attractions[i].vy*viscosity;
+				attractions[i].vz = attractions[i].vz - attractions[i].vz*viscosity;
+
+				attractions[i].ax = 0;
+				attractions[i].ay = 0;
+				attractions[i].az = 0;
+
+				
+				vfrom.x = vfrom.x + attractions[i].vx;
+				vfrom.y = vfrom.y + attractions[i].vy;
+				vfrom.z = vfrom.z + attractions[i].vz;
+
+				vto.x = vto.x - attractions[i].vx;
+				vto.y = vto.y - attractions[i].vy;
+				vto.z = vto.z - attractions[i].vz;
+
+
 					
 					if(attractions[i].f=="1"){
 						groupparticles1.children[ attractions[i].from ].position = vfrom;
@@ -579,10 +694,8 @@ function loadTexture(url) {
 						connections.geometry.vertices[i*2] = vfrom;
 						connections.geometry.vertices[i*2+1] = vto;	
 					}
-					
 
 
-				}
 			}
 
 			

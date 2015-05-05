@@ -5,21 +5,21 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<!-- Facebook Metadata /-->
 		<meta property="fb:page_id" content="79403465956" />
-		<meta property="og:image" content="http://artisopensource.net/HE/HE_logo.png" />
-		<meta property="og:description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo."/>
+		<meta property="og:image" content="http://human-ecosystems.com/HE/HE_logo.png" />
+		<meta property="og:description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo, Malmö."/>
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Human Ecosystems" />
-		<meta property="og:url" content="http://www.artisopensource.net/HE" />
+		<meta property="og:url" content="http://human-ecosystems.com/HE" />
 		<meta property="og:site_name" content="Human Ecosystems" />
 		
 
 		<!-- Google+ Metadata /-->
 		<meta itemprop="name" content="Human Ecosystems">
-		<meta itemprop="description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo.">
-		<meta itemprop="image" content="http://artisopensource.net/HE/HE_logo.png">
+		<meta itemprop="description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo, Malmö.">
+		<meta itemprop="image" content="http://human-ecosystems.com/HE/HE_logo.png">
 
 		<title>Human Ecosystems</title>
-		<meta name="description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo." />
+		<meta name="description" content="Human Ecosystems: the real-time relational ecosystems of cities. Rome, S. Paulo, Malmö." />
 		<meta name="keywords" content="Human Ecosystems, smart city, smart cities, smart communities, urban sensing, big data, bigdata, realtime city, real-time city" />
 		<meta name="author" content="humans.txt">
 
@@ -40,7 +40,7 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'YOUR GOOGLE Analytics CODE', 'artisopensource.net');
+  ga('create', 'UA-387817-3', 'artisopensource.net');
   ga('send', 'pageview');
 
 </script>
@@ -64,14 +64,23 @@
 			<div class="block">
 				<a href="ecosystem/viz/index.php?w=saopaulo" title="Saõ Paulo's Human Ecosystem" class="ecosystem-link">SAÕ Paulo</a>
 			</div>
+			<div class="block">
+				<a href="ecosystem/viz/index.php?w=malmo" title="Malmö's Human Ecosystem" class="ecosystem-link">Malmö</a>
+			</div>
+			<div class="block">
+				<a href="ecosystem/viz/index.php?w=lecce" title="Lecce's Human Ecosystem" class="ecosystem-link">Lecce</a>
+			</div>
+			<div class="block">
+				<a href="ecosystem/viz/index.php?w=newhaven" title="New Haven's Human Ecosystem" class="ecosystem-link">New Haven</a>
+			</div>
 		</div>
 
 
 		<div class="row footer">
 			<div class="block">
 				<p class="footer-paragraph">
-					Human Ecosystems is a project by <a class='footer-link' href='http://www.artisopensource.net' target="_blank" title='Art is Open Source'>AOS, Art is Open Source</a>.<br />
-					More info <a class='footer-link' href='http://www.artisopensource.net/projects/human-ecosystems.html' target="_blank" title='Human Ecosystems on Art is Open Source'>HERE</a>.
+					Human Ecosystems is a project by <a class='footer-link' href='http://human-ecosystems.com' target="_blank" title='Human Ecosystems LTD'>Human Ecosystems LTD</a>, born at <a class='footer-link' href='http://www.artisopensource.net' target="_blank" title='Art is Open Source'>AOS, Art is Open Source</a>.<br />
+					More info at <a class='footer-link' href='http://human-ecosystems.com/home/' target="_blank" title='Human Ecosystems'>HERE</a> and <a class='footer-link' href='http://www.artisopensource.net/projects/human-ecosystems.html' target="_blank" title='Human Ecosystems on Art is Open Source'>HERE</a>.
 				</p>
 			</div>
 		</div>

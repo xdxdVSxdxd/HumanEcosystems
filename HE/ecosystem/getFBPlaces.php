@@ -8,8 +8,8 @@ require_once('prepareStatements.php');
 require_once("facebook.php");
 
 $config = array();
-$config['appId'] = 'APP ID';
-$config['secret'] = 'APP Secret';
+$config['appId'] = '430384557078554';
+$config['secret'] = '1aa3cdd537c589de7a24c637e4b4bd0e';
 $config['cookie'] = true;
 
 $facebook = new Facebook($config);

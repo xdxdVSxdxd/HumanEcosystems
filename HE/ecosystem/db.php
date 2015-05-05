@@ -9,8 +9,8 @@ $mainLat = 41.8947400;
 $mainLng = 12.4839000;
 $locName = 'Rome';
 
-$fb_appID = "APP ID";
-$fb_appSecret = "APP Secret";
+$fb_appID = "430384557078554";
+$fb_appSecret = "1aa3cdd537c589de7a24c637e4b4bd0e";
 
 $prefix = "";
 
@@ -18,9 +18,9 @@ $prefix = "";
 
 try {
   $dbh = new PDO(
-  					'mysql:host=DATABASE_HOST;dbname=DATABASE_NAME', 
-  					'DATABASE_USER', 
-  					'DATABASE_PASSWORD', 
+  					'mysql:host=he.human-ecosystems.com;dbname=humanecosystems', 
+  					'dtyue8776sh', 
+  					'6d7hduie8id.ouydhASt', 
       				array(PDO::ATTR_PERSISTENT => true)
       			);
 

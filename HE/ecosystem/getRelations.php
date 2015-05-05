@@ -6,7 +6,7 @@ require_once('prepareStatements.php');
 $res = array();
 
 //select * from content where processed_relations=0
-$q1 = "SELECT * FROM " . $prefix . "relations";
+$q1 = "SELECT * FROM " . $prefix . "relations WHERE city='" . $citycode . "' "; //" ORDER BY c DESC LIMIT 0,3000";
 $r1 = $dbh->query($q1);
 if($r1){
 	foreach ( $r1 as $row1) {

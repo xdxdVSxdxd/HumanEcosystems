@@ -40,10 +40,13 @@ $q_rel7->bindParam(':c', $c);
 $q_rel7->bindParam(':w', $citycode);
 
 // users for relations
+//$q_users = $dbh->prepare("SELECT u.id as id, u.id_social as id_social, u.nick as nick, u.profile_url as profile_url, u.image_url as image_url, u.source as source, count(*) as c FROM content co, users u WHERE u.city=:w AND co.nick=u.nick GROUP BY u.nick order by c desc LIMIT 0,3000");
+//$q_users = $dbh->prepare("SELECT u.id as id, u.id_social as id_social, u.nick as nick, u.profile_url as profile_url, u.image_url as image_url, u.source as source, count(*) as c FROM content co, users u WHERE u.city=:w AND co.nick=u.nick AND co.t>DATE_SUB(NOW(), INTERVAL 2 WEEK) GROUP BY u.nick order by c desc");
 $q_users = $dbh->prepare("SELECT u.id as id, u.id_social as id_social, u.nick as nick, u.profile_url as profile_url, u.image_url as image_url, u.source as source, count(*) as c FROM content co, users u WHERE u.city=:w AND co.nick=u.nick GROUP BY u.nick order by c desc LIMIT 0,3000");
 $q_users->bindParam(':w', $citycode);
 
 // relations for relations
+//$q_rels = $dbh->prepare("SELECT u.nick as nick, u.id_social as id_social, u2.id_social as reply_to, u2.nick as reply_to_nick FROM users u, users u2, relations c WHERE c.city=:w AND c.nick1=u.nick AND c.nick2=u2.nick");
 $q_rels = $dbh->prepare("SELECT c.nick as nick, u.id_social as id_social, c.reply_to_user_id as reply_to, u2.nick as reply_to_nick FROM users u, users u2, content c WHERE c.city=:w AND c.id_user=u.id AND c.reply_to_user_id=u2.id_social");
 //$q_rels = $dbh->prepare("SELECT co1.nick as nick1, cc1.id_class as idclass, count(*) as c FROM content co1, content_to_class cc1 WHERE co1.id=cc1.id_content GROUP BY nick1, idclass");
 $q_rels->bindParam(':w', $citycode);
@@ -80,8 +83,9 @@ $q_insert_user->bindParam(':source', $source);
 $q_insert_user->bindParam(':w', $citycode);
 
 // insert content con user
-$q_insert_content = $dbh->prepare("INSERT INTO content(id_social,id_user,nick,link,t,txt,lat,lng,source,reply_to_user_id,reply_to_content_id,city) VALUES (:content_id_social,:id_user,:nick,:link,NOW(),:txt,:lat,:lng,:source,:reply_to_user_id,:reply_to_content_id,:w)");
+$q_insert_content = $dbh->prepare("INSERT INTO content(id_social,language,id_user,nick,link,t,txt,lat,lng,source,reply_to_user_id,reply_to_content_id,city) VALUES (:content_id_social,:language,:id_user,:nick,:link,NOW(),:txt,:lat,:lng,:source,:reply_to_user_id,:reply_to_content_id,:w)");
 $q_insert_content->bindParam(':content_id_social', $content_id_social);
+$q_insert_content->bindParam(':language', $language);
 $q_insert_content->bindParam(':id_user', $id_user);
 $q_insert_content->bindParam(':nick', $nick);
 $q_insert_content->bindParam(':link', $content_url);

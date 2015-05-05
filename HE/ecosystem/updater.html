@@ -4,7 +4,7 @@
 	<script src="viz/js/jquery-2.0.3.min.js"></script>
 	<script>
 
-	var timerTwitter, timerFacebook, timerInstagram, timerFBLocations,timerRelater;
+	var timerTwitter, timerFacebook, timerInstagram, timerFBLocations,timerRelater,timerEmotioner;
 	var timeout = 9000;
 	var timeout2 = 22000;
 
@@ -52,6 +52,16 @@
 		timerRelater = setTimeout(startRelater,11000);
 	}
 
+
+	var startEmotioner = function(){
+		console.log("emotions--");
+		$("div#loademotioner").load("emotioner.php");
+		if(timerEmotioner){
+			clearTimeout(timerEmotioner);
+		}
+		timerEmotioner = setTimeout(startEmotioner,13000);
+	}
+
 	$( document ).ready(function() {
 		
 		timerFacebook = setTimeout(startFacebook,3000);
@@ -59,6 +69,7 @@
 		timerTwitter = setTimeout(startTwitter,11000);
 		timerInstagram = setTimeout(startInstagram,13000);
 		timerRelater = setTimeout(startRelater,17000);
+		timerEmotioner = setTimeout(startEmotioner,14000);
 		
 		
 	});
@@ -72,5 +83,6 @@
 	<div id="loadInstagram"></div>
 	<div id="loadFBLocations"></div>
 	<div id="loadRelater"></div>
+	<div id="loadEmotioner"></div>
 </body>
 </html>

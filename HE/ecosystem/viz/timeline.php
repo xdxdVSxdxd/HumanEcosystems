@@ -64,6 +64,9 @@
 		<a href='time.php?w=<?php echo($www); ?>' title='Time'>
 			TIME
 		</a>
+		<a href='voices.php?w=<?php echo($www); ?>' title='Voices'>
+			VOICES
+		</a>
 		<a href='timeline.php?w=<?php echo($www); ?>' title='TimeLine'>
 			TIMELINE
 		</a>

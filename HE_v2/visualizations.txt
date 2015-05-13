@@ -1,0 +1,31 @@
+------------------------------
+List of Current Visualizations
+------------------------------
+
+The Visualizations can be accessed starting from your root Human Ecosystems installation.
+For example, in my local machine, i reach them at:
+
+http://localhost:8888/HE_v2/visualizations
+
+and then I click on one of the links to see the corresponding visualization.
+
+
+
+
+
+------------------------------
+To Add a new Visualization
+------------------------------
+
+Create a unique folder under "visualizations".
+Add an "index.html" OR "index.php" file to that folder, which shows your visualization.
+Make the folder independent: add into the folder everything which is needed for the visualization (javascripts, css, libraries, images...).
+Do not use absolute paths: for all links and file references, use relative paths.
+Do not use a specific [research_code], accept the [research_code] as a parameter to your visualization.
+Include in the folder a "screenshot.png" file, of preferably 400x200 pixels (it will be scaled in that way, anyway, so you might want to prepare it that way).
+From the visualizations you may use one or more of the libraries, files, css, and images which are in the "assets", "css" and "js" sub-folders of the "visualizations" folder.
+
+
+
+
+[todo: add list of current visualizations and keep maintained as soon as a new one is added]

@@ -1,0 +1,216 @@
+------------------------------
+List of Current API endpoints
+------------------------------
+
+The API endpoints can be accessed starting from your root Human Ecosystems installation.
+For example, in my local machine, i reach them at:
+
+http://localhost:8888/HE_v2/API/
+
+for the "countMessages" API endpoint, for example, this becomes:
+
+http://localhost:8888/HE_v2/API/countMessages.pgp?w=[research-code]
+
+where [research-code] is replaced with the label associated with the configured harvesting process you want to query.
+
+Where not stated differently, the results are returned in JSON format.
+
+
+-----------
+countMessages.php?w=[research-code]
+Returns the number of captured messages for [research-code]
+
+
+-----------
+getAllCoordsForResearch.php?w=[research-code]
+Return all of the locations for [research-code], together with the number of messages generated in them.
+
+
+-----------
+getAllRelations.php?w=[research-code]
+Returns all of the [nick1,nick2] relations for [research-code], together with a measure of their strength.
+
+
+-----------
+getAllUsers.php?w=[research-code]
+Returns the list of all the users for [research-code].
+
+
+-----------
+getContentForWords.php?w=[research-code]&words=word1 word2 word3 ...
+Returns all of the content for [research-code] which match ALL of the listed words.
+Case insensitive.
+
+
+-----------
+getFirstOSMAVizData.php?w=[research-code]
+Developed for OSMA. Return all of the locations for [research-code], together with the number of messages generated in them.
+
+
+-----------
+getLanguages.php?w=[research-code]
+Get the languages used in [research-code], and the number of messages for each.
+Uses ISO country codes, and 'und' for unidentified messages
+
+
+-----------
+getLatestEmotions.php?w=[research-code]
+Gets emotions expressed in the latest 1000 messages captured in [research-code], and for each the number of messages expressing them.
+
+
+-----------
+getLatestLanguages.php?w=[research-code]
+Gets languages used in the latest 1000 messages captured in [research-code], and for each the number of messages using them.
+Uses ISO country codes, and 'und' for unidentified messages
+
+-----------
+getLatestRelations.php?w=[research-code]
+Gets latest 1000 relations added in [research-code] under the form (nick1,nick2,c) where 'c' is their strength.
+
+
+-----------
+getPrediction.php?w=[research-code]
+Gets a random prediction for [research-code]. See prediction types in this file.
+
+
+
+-----------
+pattern_graphic.php
+Prediction types. Get a neat little random ASCII graphic pattern.
+
+
+-----------
+pattern_place_mono.php?w=[research-code]
+Prediction types. Get a prediction of likely places a certain random user of [research-code] will be in.
+Predictions come under the form:
+"[nick] will be within 1 mile of the following coordinates ([lat],[lon]) in the next [days] days"
+Or "The future geographical position of [nick] is unforeseeable, as of now." if there are no discernable patterns in the user's position.
+
+
+-----------
+pattern_place_multi.php?w=[research-code]
+Prediction types. Get a prediction of how correlated the locations of some random users of [research-code] will be.
+Predictions come under the form:
+"These users [[nicks]] will find themselves within 1 mile of each other around the following coordinates ([lat],[lon]) in the next [days] days."
+Or "The future geographical positions these users [[nicks]] are not correlated." if there are no discernable patterns in the users' positions.
+
+
+-----------
+pattern_word_mono.php?w=[research-code]
+Prediction types. Get a prediction of what a random user of [research-code] will be talking about in the following period of time.
+Predictions come under the form:
+"[nick] will be dealing with [subject1] and [subject2] within 1 mile of the following coordinates ([lat],[lon]) in the next [days] days"
+OR
+"[nick] will be dealing with [subject1] and [subject2] in the next [days] days"
+Or
+"The future interests of [nick] are unforeseeable, as of now." if there are no recognizable patterns.
+OR
+"Nothing can be foreseen about the future interests of [nick], as of now." if there are no recognizable patterns.
+
+
+
+-----------
+getRandomMessage.php?w=[research-code]
+Gets a random message (txt) and user information (nick,imageurl) from [research-code].
+
+
+-----------
+getRelations.php?w=[research-code]
+Gets ALL relations added in [research-code] under the form (nick1,nick2,c) where 'c' is their strength.
+
+
+-----------
+getRelationsBetweenTwoUsers.php?w=[research-code]&n1=[nickname 1]&n2=[nickname 2]
+Within [research-code], searches if there is a relation between [nickname 1] and [nickname 2].
+If it is present, it returns its strength (c).
+If it is not present, it returns and empty array.
+
+
+-----------
+getUserProfile.php?n=[nickname]
+If it exists, get profile for user [nickname].
+
+
+-----------
+getUsers.php?w=[research-code]&fromID=[id]
+Get 1000 user profiles, starting from ID [id].
+To get the first lot, use 0 for [id].
+
+
+-----------
+getClasses.php?w=[research-code]
+Get all classes which we're listening to in [research-code].
+
+
+-----------
+getContentForMap.php?w=[research-code]
+Get content for [research-code] to populate a map. Each content indicates latitude,longitude, the class of the content and its numerosity.
+
+
+-----------
+getContentNearby.php?w=[research-code]&lat=[center-latitude]&lng=[center-longitude]&rad=[bounding-box-radius]
+Get posts in [research-code] which are within the bounding box of [bounding-box-radius] degrees around the coordinates ([center-latitude],[center-longitude])
+
+
+-----------
+getContentUpdate.php?w=[research-code]
+Get latest 300 contents harvested for [research-code].
+
+
+-----------
+getTimelineData.php?w=[research-code]
+Get data for [research-code] in timeline format.
+For each Y:M:D hh give back the number of contents which were harvested.
+
+
+-----------
+getTimelineDataForClasses.php?w=[research-code]&c=[class-ID]
+Get data for [research-code] in timeline format, for a certain [class-ID] of harvested files.
+For each Y:M:D hh give back the number of contents which were harvested, in the [class-ID] indicated by 'c'.
+
+
+-----------
+tools-getEmotionTotalsForWords.php?w=[research-code]
+Gives back the emotional totals for each word in the classes which are being listened to in [research-code].
+Gives back a CSV result with a header row.
+
+-----------
+tools-getForDistribution.php?w=[research-code]
+Gives back a CSV file with header row listing [word,emotion,c] tuples for [research-code].
+Each row lists a word being listened to, the emotion and how often the emotion has been expressed for that word.
+
+
+-----------
+tools-getForDistributionTimeOfDay.php?w=[research-code]
+Gives back a CSV file with header row listing how often words being listened to in the various classes appear at each time of day (hour).
+
+-----------
+tools-getForDistributionUsers.php?w=[research-code]
+Gives back a CSV file with header row listing [word,c,cw] tuples.
+In them: word is a word being listened to; c is a number showing how many times a user has used it; cw is the number of users having used that word that many times.
+It is a distribution of how the users have used the words with certain frequencies.
+
+-----------
+tools-getProjectStatistics.php?w=[research-code]
+Gives back a JSON file with some statistics for [research-code] (number of contents captured, number of users, number of geolocated contents, distribution of emotions).
+
+
+-----------
+tools-getRelations.php?w=[research-code]
+Gives back the JSON graph structure of the relations contained in [research-code].
+The JSON has a "nodes" and "links" array which contain the details for the graph's nodes (index, id, nickname, profile URL) and for each link (source index, target index, weight).
+
+
+-----------
+tools-getRelationsWithEmotions.php?w=[research-code]
+Same as "tools-getRelations.php", but the links include the ID of the emotions which was last expressed in the relation.
+Useful, but less efficient (takes up lots of memory on the server).
+
+-----------
+tools-getWordTimelines.php?w=[research-code]
+Gives back a CSV file with heades listing number of times each word has been used at each minute along the timeline.
+The rows are in [word,date,count] format. The "word" is the word contained in classes. The 'date' is expressed as "YYYY MM DD HH:mm". The 'count' is the number of times it has appeared in the minute.
+
+
+
+[todo: add list of current API endpoints and keep maintained as soon as a new one is added]

@@ -1,0 +1,16 @@
+db-host=
+db-name=
+db-user=
+db-password=
+research-name=
+research-label=
+research-geo=clat,clng,minlat,minlng,maxlat,maxlng
+research-classes=class1,class2,...
+research-words=word1,word2,...|word1,word2,...
+fb-app-id=
+fb-ap-secret=
+tw-consumer-key=
+tw-consumer-secret=
+tw-token=
+tw-token-secret=
+in-client-id=

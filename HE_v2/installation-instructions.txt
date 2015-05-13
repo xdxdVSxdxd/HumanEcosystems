@@ -1,0 +1,156 @@
+-------------------------
+Installation Instructions
+-------------------------
+
+**
+1. Install a Web Server & MySQL database on your machine
+
+There are many ways in which to do that.
+One simple way is to install one of the Bitnami stacks suitable for your operating system (go to https://bitnami.com/stacks and install WAMP, MAMP or LAMP, depending on your OS).
+If you are hosting it online, servers usually come with Web Server + DB already installed.
+
+
+**
+2. Copy the files to a folder on your web server
+
+Copy the entire "HE_v2" folder on the public html folder of your server. Usually it is something like a "htdocs" folder, or the root of your ftp, if you are connecting to a remote server. Check with your provider.
+
+
+**
+3. Obtain your API keys from your social networks (Facebook, Twitter, Instagram...) [more coming up]
+
+For Facebook:
+Visit https://developers.facebook.com , create an application (MyApps, Add a New App), fill the modules, and get your App ID and App Secret.
+
+For Twitter:
+Visit https://dev.twitter.com/ , go to "Manage your Apps", "Create a New App" and fill in all the required information.
+When the app is created, go to where it says "manage keys and access tokens".
+Use the information provided to obtain: the Consumer Key and Consumer Secret.
+From the same screen use the "Create my access token function", and grab your Access Token and Access Token Secret
+
+For Instagram:
+Visit https://instagram.com/developer/ , select "Manage Clients", use the "Register New Client", fill in all information.
+When process is complete, check out the generated information and grab your Client ID and Client Secret
+
+
+
+**
+4. Create a Database
+
+Using your hosting service (or the PhPMyAdmin interface if you used Bitnami, for example) create a new Database (any name) and a user with all privileges on the database.
+Make sure you know the database name, the database host (the address of the database), the database user name and password.
+
+
+
+
+
+**
+5. Edit the "config_template.txt" file
+
+Fill in all of the information obtained in steps 3 and 4.
+
+For the rest of them:
+
+In "research-name=" insert the name of your research (anything). Make sure that it reflects what you're capturing.
+
+In "research-label=" do the same thing as before, just take away strange characters (accents, non alphanumerics, accents...) and also take away spaces
+
+In "research-geo=clat,clng,minlat,minlng,maxlat,maxlng" replace "clat,clng,minlat,minlng,maxlat,maxlng" with the description of the geographical area which you would like to observe.
+Here:
+replace "clat" with the center latitude of the area (ex.: 49.2)
+replace "clng" with the center longitude of the area (ex.: 12.6)
+replace "minlat" with the minimum latitude of the area (ex.: 49.1)
+replace "minlng" with the minimum longitude of the area (ex.: 12.5)
+replace "maxlat" with the maximum latitude of the area (ex.: 49.3)
+replace "maxlng" with the maximum longitude of the area (ex.: 12.7)
+
+"minlat,minlng,maxlat,maxlng" form the geographical bounding box of your observation.
+Note that theoretically you can put even a very large area in. But you will have to face the fact that if you do that you will generate a *large* size of information (and thus will need to store it on your DB, which could not allow you to store the multiple TeraBytes of data generated), and that if a large area is specified, multiple different harvesting threads will be started at the same time, possibly completely hanging your computer, consuming all of its bandwith and processing power.
+
+We will provide with a separate tutorial on how to configure large geo areas, separately.
+
+If your observation is location independent, just leave the item blank (e.g.: it becomes "research-geo=" , with nothing after it).
+
+In "research-classes=class1,class2,..." configure the "classes" of things which you would like to capture.
+
+There are multiple options.
+
+If you have a geographical area set and would like to capture everything in it, just provide one class named "Everything". Thus it would become "research-classes=Everything"
+
+In all of the other cases, list what is roughly the list of topic names you want to listen to.
+For example, if you want to listen to what people are saying about Associations, it could be "research-classes=Associations,Volunteering,NGOs".
+
+Don't worry about being too specific, you will do it in the next step. For now just include broad topics you would like to listen to.
+
+Use your "research-words=word1,word2,...:word1,word2,..." to fine tune, for each class, the starting words or phrases used for listening.
+
+In the previous example, listening to Associations could mean starting the search from the words/phrases "association", in different languages (such as "association, associazione,asociación,verein", in english, italian, spanish and german).
+
+For Volunteering it could be "volontariato,volunteering,ehrenamtliche arbeit,volontariat,voluntariado".
+
+For NGOs it could be "ngo,ong,Nicht-Regierungsorganisationen,organisations non-gouvernementales,organizaciones no gubernamentales,non-governmental organizations".
+
+Each word/phrase can be maximum 255 characters long.
+
+In this case the resulting configuration could be:
+
+research-words=association,associazione,asociación,verein:volontariato,volunteering,ehrenamtliche arbeit,volontariat,voluntariado:ngo,ong,Nicht-Regierungsorganisationen,organisations non-gouvernementales,organizaciones no gubernamentales,non-governmental organizations
+
+Note that the "|" characters split the various word/phrases lists for the various topics, and that order is important: the first class goes with the first list, the second class goes with the second list, and so on.
+
+
+
+**
+6. Start your database and web server and invoke the "http://[host]/[path]/HE_v2/installer.php" from your browser.
+
+In the URL [host] is the internet address for your server (like localhost, 127.0.0.1 if you installed on a local machine, or www.awesomehost.com if you installed in your public hosting service.).
+
+And [path] is used only if you installed your "HE_v2" in some sub-folder of your "htdocs" or equivalent, on your webserver.
+
+My local installation, for example, is "http://localhost:8888/HE_v2/installer.php", because I have copied the "HE_v2" folder directly inside the "htdocs" folder of my Bitnami.
+
+
+
+**
+7. Troubleshoot
+
+If you followed he instructions, and if planets align, everything should go as planned, and work.
+Obviously, the first times it will not.
+
+Don't worry: eventually you will be able to do this easily and quickly, setting up a new Human Ecosystems instance in a few minutes.
+
+And, eventually, we will build a nice installer for it.
+
+For now, if something goes wrong:
+
+- erase everything from the database (not the database or the user)
+- put away your "config_template.txt" file
+- replace your original "HE_v2" folder as you downloaded it from github
+- copy back onto it the "config_template.txt" file, so that you preserve the things already configured
+- go back through the instructions, to see if you did it right
+- if everything fails (but try again at least once :)  ) contact us directly or, even better, on the github issues page, so that everyone can benefit from the answers.
+
+
+
+**
+8. Remove the "config-template.txt" file
+
+This is for security reasons, otherwise your passwords and secrets would remain accessible.
+You can place it in a safe place, so that you can store your configuration, if needed.
+
+
+
+**
+9. Start the capturing process
+
+If you are on a web server without shell access, just run the "updater.php" file in your browser, and leave the window open at all times (at least whenever you want the capture to be going on). It may seem like a blank white window, but if you inspect it (for example through the Chrome developer tools) you will see that a lot of things are going one, invoking one process after the other.
+
+For example, in my local machine, I invoke "http://localhost:8888/HE_v2/updater.php".
+
+
+**
+10. Open one of the visualizations, use the APIs or browse the database
+
+Browse the "visualizations.txt" file for the list of current visualizations.
+Browse the "API.txt" for a list of current API endpoints.
+Browse the database to see what data you have captured so far.

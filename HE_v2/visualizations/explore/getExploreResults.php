@@ -42,7 +42,8 @@ if($searchString!=""){
 				
 				$results["nodes"][] = $u;
 
-				$q2 = "SELECT DISTINCT nick1, nick2, c FROM relations WHERE nick1='" . $row1["nick"] . "' OR nick2='" . $row1["nick"] . "'";
+				$q2 = "SELECT DISTINCT nick1, nick2, c FROM relations WHERE nick1='" . str_replace("'", "''", $row1["nick"]) . "' OR nick2='" . str_replace("'", "''", $row1["nick"]) . "'";
+				//echo($q2);
 				$r2 = $dbh->query($q2);
 				if($r2){
 					foreach ( $r2 as $row2) {
@@ -55,7 +56,7 @@ if($searchString!=""){
 						if(!findUser($row2["nick1"],$dbh)){
 							//aggiungi user1 a users
 
-									$q3 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.research='" . $research_code . "' AND u.nick='" . $row2["nick1"] . "'";
+									$q3 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.research='" . $research_code . "' AND u.nick='" . str_replace("'", "''", $row2["nick1"]) . "'";
 		
 									$r3 = $dbh->query($q3);
 									if($r3){

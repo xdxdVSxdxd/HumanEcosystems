@@ -146,10 +146,19 @@ Get all classes which we're listening to in [research-code].
 getContentForMap.php?w=[research-code]
 Get content for [research-code] to populate a map. Each content indicates latitude,longitude, the class of the content and its numerosity.
 
+-----------
+getContentUpdateForMap.php?w=[research-code]
+Get content update (max 100 recent posts, good for polling) for [research-code] to populate a map. Each content indicates latitude,longitude, the class of the content and its numerosity.
+
 
 -----------
 getContentNearby.php?w=[research-code]&lat=[center-latitude]&lng=[center-longitude]&rad=[bounding-box-radius]
 Get posts in [research-code] which are within the bounding box of [bounding-box-radius] degrees around the coordinates ([center-latitude],[center-longitude])
+
+
+-----------
+getContentRecentNearby.php?w=[research-code]&lat=[center-latitude]&lng=[center-longitude]&rad=[bounding-box-radius]
+Get recent posts (max 100 latest posts) in [research-code] which are within the bounding box of [bounding-box-radius] degrees around the coordinates ([center-latitude],[center-longitude])
 
 
 -----------

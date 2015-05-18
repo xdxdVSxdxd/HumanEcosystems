@@ -65,6 +65,10 @@ $q_classes->bindParam(':cccode', $research_code);
 $q_map = $dbh->prepare("SELECT *, count(*) as c FROM (SELECT c.lat as lat, c.lng as lng, class.name as name FROM content c, content_to_class cc, classes class WHERE NOT c.lat=-1 AND NOT c.lat=999 AND c.research=:w AND c.id=cc.id_content AND class.id=cc.id_class ORDER BY c.id DESC LIMIT 0,500 ) a GROUP BY lat,lng");
 $q_map->bindParam(':w', $research_code);
 
+// recent content for map
+$q_map_upd = $dbh->prepare("SELECT *, count(*) as c FROM (SELECT c.lat as lat, c.lng as lng, class.name as name FROM content c, content_to_class cc, classes class WHERE NOT c.lat=-1 AND NOT c.lat=999 AND c.research=:w AND c.id=cc.id_content AND class.id=cc.id_class ORDER BY c.id DESC LIMIT 0,100 ) a GROUP BY lat,lng");
+$q_map_upd->bindParam(':w', $research_code);
+
 // controllo se c'e' content
 $q_exist_content = $dbh->prepare("SELECT id FROM content WHERE id_social=:id_social");
 $q_exist_content->bindParam(':id_social', $id_social);

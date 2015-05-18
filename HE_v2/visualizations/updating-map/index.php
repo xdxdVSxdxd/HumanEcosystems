@@ -109,7 +109,20 @@
 		        map.mapTypes.set('map_style', styledMap);
 			  	  map.setMapTypeId('map_style');
 
-            $.getJSON("../../API/getContentForMap.php?w=" + project)
+            if(timerUpdater!=null){
+              clearTimeout(timerUpdater);
+            }
+            timerUpdater = setTimeout(getRecentContentsForMap, timerDelay);
+
+			}
+
+      var timerDelay = 5000;
+
+      var timerUpdater = null;
+
+      var getRecentContentsForMap = function(){
+
+        $.getJSON("../../API/getContentUpdateForMap.php?w=" + project)
             .done(function(data){
 
                 // insert markers on map
@@ -117,12 +130,18 @@
 
                 for(var i = 0; i<data.length; i++){
                   var aLatLng = new google.maps.LatLng(data[i].lat,data[i].lng);
+                  var found = false;
 
-                  var marker = new google.maps.Marker({
-                      position: aLatLng,
-                      map: map,
-                      title: data[i].name,
-                      icon: {
+                  for(var j = 0; j<markers.length && !found; j++){
+
+                    if(markers[j].getPosition().lat()==aLatLng.lat() && markers[j].getPosition().lng()==aLatLng.lng()){
+                      found = true;
+
+                      var m = markers[j];
+
+                      markers.splice(j,1);
+
+                      m.setIcon({
                         path: google.maps.SymbolPath.CIRCLE,
                         fillColor: '#F08000',
                         fillOpacity: 0.8,
@@ -130,21 +149,63 @@
                         strokeOpacity: 0.8,
                         strokeWeight: 2,
                         scale: Math.min(eval(data[i].c)*3 , 30)
-                      }
-                  });
+                      });
 
-                  google.maps.event.addListener(marker, 'click', markerClickHandler );
+                      m.setAnimation(google.maps.Animation.DROP);
 
-                  markers.push(marker);
+                      markers.push( m );
+                    }
+
+                  }
+
+                  if(!found){
+                    var marker = new google.maps.Marker({
+                        position: aLatLng,
+                        map: map,
+                        title: data[i].name,
+                        icon: {
+                          path: google.maps.SymbolPath.CIRCLE,
+                          fillColor: '#F08000',
+                          fillOpacity: 0.8,
+                          strokeColor: '#E07000',
+                          strokeOpacity: 0.8,
+                          strokeWeight: 2,
+                          scale: Math.min(eval(data[i].c)*3 , 30)
+                        },
+                        animation: google.maps.Animation.DROP
+                    });
+
+                    google.maps.event.addListener(marker, 'click', markerClickHandler );
+
+                    markers.push(marker);  
+                  }
+
+                  if(markers.length>1500){
+                    var m = markers.splice(0,1);
+                    m.setMap(null);
+                    m = null;
+                  }
+
 
                 }
+
+
+                if(timerUpdater!=null){
+                  clearTimeout(timerUpdater);
+                }
+                timerUpdater = setTimeout(getRecentContentsForMap, timerDelay);
                 
             })
             .fail(function( jqxhr, textStatus, error ){
                 //fare qualcosa in caso di fallimento
+
+                if(timerUpdater!=null){
+                  clearTimeout(timerUpdater);
+                }
+                timerUpdater = setTimeout(getRecentContentsForMap, timerDelay);
             });
 
-			}
+      };
 
 			google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -162,7 +223,7 @@
         currentMarker = this;
 
 
-        $.getJSON("../../API/getContentNearby.php" , { 'w' : project, 'lat' : clickedLat , 'lng' : clickedLng , "rad" : 0.02 })
+        $.getJSON("../../API/getContentRecentNearby.php" , { 'w' : project, 'lat' : clickedLat , 'lng' : clickedLng , "rad" : 0.02 })
         .done(function(data){
 
             //console.log(data);

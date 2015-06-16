@@ -82,7 +82,7 @@ For example, if you want to listen to what people are saying about Associations,
 
 Don't worry about being too specific, you will do it in the next step. For now just include broad topics you would like to listen to.
 
-Use your "research-words=word1,word2,...:word1,word2,..." to fine tune, for each class, the starting words or phrases used for listening.
+Use your "research-words=word1,word2,...|word1,word2,..." to fine tune, for each class, the starting words or phrases used for listening.
 
 In the previous example, listening to Associations could mean starting the search from the words/phrases "association", in different languages (such as "association, associazione,asociación,verein", in english, italian, spanish and german).
 
@@ -94,7 +94,7 @@ Each word/phrase can be maximum 255 characters long.
 
 In this case the resulting configuration could be:
 
-research-words=association,associazione,asociación,verein:volontariato,volunteering,ehrenamtliche arbeit,volontariat,voluntariado:ngo,ong,Nicht-Regierungsorganisationen,organisations non-gouvernementales,organizaciones no gubernamentales,non-governmental organizations
+research-words=association,associazione,asociación,verein|volontariato,volunteering,ehrenamtliche arbeit,volontariat,voluntariado|ngo,ong,Nicht-Regierungsorganisationen,organisations non-gouvernementales,organizaciones no gubernamentales,non-governmental organizations
 
 Note that the "|" characters split the various word/phrases lists for the various topics, and that order is important: the first class goes with the first list, the second class goes with the second list, and so on.
 

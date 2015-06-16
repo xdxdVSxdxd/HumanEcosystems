@@ -22,7 +22,7 @@ if(isset($_REQUEST["rad"])){
 
 
 if($lat!=999 && $lng!=999){
-	$q1 = "SELECT distinct nick, txt, link FROM content WHERE research='" . $research_code . "' AND lat>=" . ($lat-$rad) . " AND lat<=" . ($lat+$rad) . " AND lng>=" . ($lng-$rad) . " AND lng<=" . ($lng+$rad) . " ORDER BY t DESC LIMIT 0,50";
+	$q1 = "SELECT distinct nick, txt, link FROM content WHERE research='" . $research_code . "' AND lat>=" . ($lat-$rad) . " AND lat<=" . ($lat+$rad) . " AND lng>=" . ($lng-$rad) . " AND lng<=" . ($lng+$rad) . " ORDER BY t DESC LIMIT 0,5";
 
 
 	$r1 = $dbh->query($q1);

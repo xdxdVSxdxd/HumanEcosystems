@@ -125,12 +125,6 @@ if(isset($fc) && $fc!=""){
 						$content_body = $js["data"][$i]["caption"]["text"];
 						$reply_to_user_id = "-1";
 						$reply_to_content_id = "-1";
-						if($status->in_reply_to_status_id_str){
-							$reply_to_content_id = $status->in_reply_to_status_id_str;
-						}
-						if($status->in_reply_to_user_id_str){
-							$reply_to_user_id = $status->in_reply_to_user_id_str;
-						}
 						$currLat = 999;
 						$currLng = 999;
 						if($js["data"][$i]["location"] && $js["data"][$i]["location"]["latitude"] && $js["data"][$i]["location"]["longitude"] ){

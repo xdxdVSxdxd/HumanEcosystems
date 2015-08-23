@@ -22,8 +22,10 @@ if($r1){
 
 		foreach ($emowords as $emo ) {
 			
+			$rrr = $row1["txt"];
+			$rrr = str_replace("#", " ", $rrr);
 
-			if (   (strpos($row1["txt"], " " . $emo["word"]) !== false)   || (strpos($row1["txt"], $emo["word"] . " " ) !== false)  ) {
+			if (   (strpos($rrr, " " . $emo["word"]) !== false)   || (strpos($rrr, $emo["word"] . " " ) !== false)  ) {
 			    
 				$q2 = "INSERT INTO emotions_content(id_content,id_emotion) VALUES( " . $row1["id"] . " , " . $emo["idemotion"] . ")";
 				$r2 = $dbh->query($q2);

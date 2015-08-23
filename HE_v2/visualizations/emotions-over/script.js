@@ -229,7 +229,7 @@ var legend;
         height = $("#bottom-diagrams").height() - margin.top - margin.bottom;
             
 
-        var parseDate = d3.time.format("%Y%m%d%H").parse;
+        var parseDate = d3.time.format("%Y%m%d%H%M").parse;
 
         var x = d3.time.scale()
             .range([0, width]);
@@ -276,7 +276,7 @@ var legend;
         height = $("#bottom-diagrams").height() - margin.top - margin.bottom;
             
 
-        parseDate = d3.time.format("%Y%m%d%H").parse;
+        parseDate = d3.time.format("%Y%m%d%H%M").parse;
 
         x = d3.time.scale()
             .range([0, width]);

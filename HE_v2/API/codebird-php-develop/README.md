@@ -19,8 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ### Requirements
 
-- PHP 5.3.0 or higher
+- PHP 5.4.0 or higher
 - OpenSSL extension
+
+
+Summary
+-------
+
+Use Codebird to connect to the Twitter REST **and Streaming API :sparkles:** from your PHP code.  
+Codebird supports full 3-way OAuth as well as application-only auth.
 
 
 Authentication
@@ -48,9 +55,9 @@ session_start();
 
 if (! isset($_SESSION['oauth_token'])) {
     // get the request token
-    $reply = $cb->oauth_requestToken(array(
+    $reply = $cb->oauth_requestToken([
         'oauth_callback' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
-    ));
+    ]);
 
     // store the token
     $cb->setToken($reply->oauth_token, $reply->oauth_token_secret);
@@ -69,9 +76,9 @@ if (! isset($_SESSION['oauth_token'])) {
     unset($_SESSION['oauth_verify']);
 
     // get the access token
-    $reply = $cb->oauth_accessToken(array(
+    $reply = $cb->oauth_accessToken([
         'oauth_verifier' => $_GET['oauth_verifier']
-    ));
+    ]);
 
     // store the token (which is different from the request token!)
     $_SESSION['oauth_token'] = $reply->oauth_token;
@@ -151,25 +158,25 @@ In most cases, giving all parameters in an array is easier,
 because no encoding is needed:
 
 ```php
-$params = array(
+$params = [
     'status' => 'Fish & chips'
-);
+];
 $reply = $cb->statuses_update($params);
 ```
 
 ```php
-$params = array(
+$params = [
     'status' => 'I love London',
     'lat'    => 51.5033,
     'long'   => 0.1197
-);
+];
 $reply = $cb->statuses_update($params);
 ```
 
 ```php
-$params = array(
+$params = [
     'screen_name' => 'jublonet'
-);
+];
 $reply = $cb->users_show($params);
 ```
 This is the [resulting tweet](https://twitter.com/LarryMcTweet/status/482239971399835648)
@@ -183,17 +190,17 @@ Tweet media can be uploaded in a 2-step process:
 
 ```php
 // these files to upload. You can also just upload 1 image!
-$media_files = array(
+$media_files = [
     'bird1.jpg', 'bird2.jpg', 'bird3.jpg'
-);
+];
 // will hold the uploaded IDs
-$media_ids = array();
+$media_ids = [];
 
 foreach ($media_files as $file) {
     // upload all media files
-    $reply = $cb->media_upload(array(
+    $reply = $cb->media_upload([
         'media' => $file
-    ));
+    ]);
     // and collect their IDs
     $media_ids[] = $reply->media_id_string;
 }
@@ -209,10 +216,10 @@ to ```statuses/update```, like this:
 $media_ids = implode(',', $media_ids);
 
 // send tweet with these medias
-$reply = $cb->statuses_update(array(
+$reply = $cb->statuses_update([
     'status' => 'These are some of my relatives.',
     'media_ids' => $media_ids
-));
+]);
 print_r($reply);
 );
 ```
@@ -252,11 +259,11 @@ $fp         = fopen($file, 'r');
 
 // INIT the upload
 
-$reply = $cb->media_upload(array(
+$reply = $cb->media_upload([
     'command'     => 'INIT',
     'media_type'  => 'video/mp4',
     'total_bytes' => $size_bytes
-));
+]);
 
 $media_id = $reply->media_id_string;
 
@@ -267,12 +274,12 @@ $segment_id = 0;
 while (! feof($fp)) {
     $chunk = fread($fp, 1048576); // 1MB per chunk for this sample
 
-    $reply = $cb->media_upload(array(
+    $reply = $cb->media_upload([
         'command'       => 'APPEND',
         'media_id'      => $media_id,
         'segment_index' => $segment_id,
         'media'         => $chunk
-    ));
+    ]);
 
     $segment_id++;
 }
@@ -281,10 +288,10 @@ fclose($fp);
 
 // FINALIZE the upload
 
-$reply = $cb->media_upload(array(
+$reply = $cb->media_upload([
     'command'       => 'FINALIZE',
     'media_id'      => $media_id
-));
+]);
 
 var_dump($reply);
 
@@ -293,10 +300,11 @@ if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
 }
 
 // Now use the media_id in a tweet
-$reply = $cb->statuses_update(array(
+$reply = $cb->statuses_update([
     'status'    => 'Twitter now accepts video uploads.',
     'media_ids' => $media_id
-));
+]);
+
 ```
 
 :warning: The Twitter API reproducibly rejected some MP4 videos even though they are valid. It’s currently undocumented which video codecs are supported and which are not.
@@ -413,6 +421,69 @@ Please note that your OAuth consumer key and secret is shared within
 multiple Codebird instances, while the OAuth request and access tokens with their
 secrets are *not* shared.
 
+
+Consuming the Twitter Streaming API
+-----------------------------------
+
+The Streaming APIs give developers low latency access to Twitter’s global stream of
+Tweet data. A proper implementation of a streaming client will be pushed messages
+indicating Tweets and other events have occurred, without any of the overhead
+associated with polling a REST endpoint.
+
+To consume one of the available Twitter streams, follow these **two steps:**
+
+1. Set up a callback function that gets called for every new streaming message that arrives.
+
+   Codebird also calls this function once per second, to allow you to work on any due tasks, and to give you the chance to cancel the stream even if no new messages appear.
+
+2. After creating the callback, tell Codebird about it using a [callable](http://php.net/manual/en/language.types.callable.php). Then start consuming the stream.
+
+```php
+// First, create a callback function:
+
+function some_callback($message)
+{
+    // gets called for every new streamed message
+    // gets called with $message = NULL once per second
+
+    if ($message !== null) {
+        print_r($message);
+        flush();
+    }
+
+    // return false to continue streaming
+    // return true to close the stream
+
+    // close streaming after 1 minute for this simple sample
+    // don't rely on globals in your code!
+    if (time() - $GLOBALS['time_start'] >= 60) {
+        return true;
+    }
+
+    return false;
+}
+
+// set the streaming callback in Codebird
+$cb->setStreamingCallback('some_callback');
+
+// any callable is accepted:
+// $cb->setStreamingCallback(['MyClass', 'some_callback']);
+
+// for canceling, see callback function body
+// not considered good practice in real world!
+$GLOBALS['time_start'] = time();
+
+// Second, start consuming the stream:
+$reply = $cb->user();
+
+// See the *Mapping API methods to Codebird function calls* section for method names.
+// $reply = $cb->statuses_filter('track=Windows');
+```
+
+Find more information on the [Streaming API](https://dev.twitter.com/streaming/overview)
+in the developer documentation website.
+
+
 How Do I…?
 ----------
 
@@ -508,11 +579,11 @@ Remember that your application needs to be whitelisted to be able to use xAuth.
 
 Here’s an example:
 ```php
-$reply = $cb->oauth_accessToken(array(
+$reply = $cb->oauth_accessToken([
     'x_auth_username' => 'username',
     'x_auth_password' => '4h3_p4$$w0rd',
     'x_auth_mode' => 'client_auth'
-));
+]);
 ```
 
 Are you getting a strange error message?  If the user is enrolled in

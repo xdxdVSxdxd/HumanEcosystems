@@ -19,31 +19,33 @@ $source = "TWIT";
 
 
 
-$query = "geocode=" . $mainLat . "," . $mainLng . ",6km&result_type=recent&count=100";
- 
-
-if($mainLng==999 && $mainLng==999 && $words[0]["word"]!="*"){
-
-	$qq = "";
-	for($i=0 ; $i<count($words) ; $i++){
-		$qq = $qq . $words[$i]["word"];
-		if($i<count($words)-1){
-			$qq = $qq . " OR ";
-		}
-	}
-
-	$query = "q=" . $qq . "&result_type=recent&count=100";
-} else if($mainLng==999 && $mainLng==999 && $words[0]["word"]=="*"){
-	$query = "q=" . $citycode . "&result_type=recent&count=100";
-}
 
 
-$result = $cb->search_tweets($query, true);
 
-//echo($result->httpstatus);
+function twitterStreamCallback($status){
 
 
-if(isset($result) && $result!=""){
+	if ($status !== null) {
+        print_r($status);
+        flush();
+    }
+
+    // return false to continue streaming
+    // return true to close the stream
+
+    // close streaming after 1 minute for this simple sample
+    // don't rely on globals in your code!
+    if (time() - $GLOBALS['time_start'] >= 60) {
+    	echo("<br /><br /><br />[end]<br />");
+        return true;
+    }
+
+    return false;
+
+	/* codice handle begin
+
+
+	if(isset($result) && $result!=""){
 	$js = $result; //json_decode($result,true);
 
 	//print_r($js);
@@ -205,7 +207,48 @@ if(isset($result) && $result!=""){
 	
 
 
-}//if(isset($fc) && $fc!=""){
+	}//if(isset($fc) && $fc!=""){
+
+
+
+	codice handle end */
+
+
+} // twitterstreamstatus end
+
+
+
+
+$cb->setStreamingCallback('twitterStreamCallback');
+
+$GLOBALS['time_start'] = time();
+
+
+$query = "geocode=" . $mainLat . "," . $mainLng . ",6km&result_type=recent&count=100";
+ 
+
+if($mainLng==999 && $mainLng==999 && $words[0]["word"]!="*"){
+
+	$qq = "";
+	for($i=0 ; $i<count($words) ; $i++){
+		$qq = $qq . $words[$i]["word"];
+		if($i<count($words)-1){
+			$qq = $qq . " OR ";
+		}
+	}
+
+	$query = "q=" . $qq . "&result_type=recent&count=100";
+} else if($mainLng==999 && $mainLng==999 && $words[0]["word"]=="*"){
+	$query = "q=" . $citycode . "&result_type=recent&count=100";
+}
+
+
+$result = $cb->search_tweets($query, true);
+
+
+
+
+
 
 
 ?>

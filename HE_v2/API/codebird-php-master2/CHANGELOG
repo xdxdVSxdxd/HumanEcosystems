@@ -1,47 +1,6 @@
 codebird-php - changelog
 ========================
 
-2.7.1 (2015-08-16)
-+ #124 Download redirected remote images
-
-2.7.0 (2015-05-14)
-- #92, #108 Fix issues with uploading special chars
-+ #109 Proxy support
-- Drop support for internal and old API methods
-+ #111 Set user agent for remote calls
-+ #106 Add logout method
-+ #86 Return exception for failed cURL requests
-
-2.6.1 (2014-12-13)
-- #90 Allow uploading media with special chars
-
-2.6.0 (2014-10-12)
-+ #67 Don't require cURL, allow stream connections too
-+ Use default timeout
-+ #69 Add composer/installers to allow install path changes
-- Regression: Codebird::getApiMethods removed accidentally in 2.5.0
-+ #66 Allow remote media uploads
-- #81 CURLOPT_TIMEOUT_MS and CURLOPT_CONNECTTIMEOUT_MS errors on PHP 5.3
-- #83 Use POST for users/lookup and statuses/lookup, params may get too long for GET
-+ Update README to reflect new process for uploading single/multiple media, see #78
-
-2.5.0 (2014-06-20)
-+ Add section about cacert.pem to README
-+ Option to set cURL timeout
-+ #42 Allow to get the supported API methods as array
-+ #48 Update composer file to jublonet path
-+ Update cacert.pem root certificates file
-+ #58 support for GET statuses/retweeters/ids
-+ #53 Better Proxy HTTP status detection
-- #62 Places & Geo API call issue
-+ #33 Support internal API methods
-+ #59 Support all known API methods
-+ Reset bearer token when requesting a new token
-+ #61 Return rate limit details with each API call
-+ #60 Support uploading multiple media
-- #63 Return rate-limiting info only if contained in response
-- #57 Don't require consumer key if bearer token is already known
-
 2.4.1 (2013-06-23)
 + #26 Stringify null and boolean parameters
 + Validate Twitter SSL certificate for oauth2/token method

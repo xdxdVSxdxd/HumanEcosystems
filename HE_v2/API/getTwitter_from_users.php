@@ -29,16 +29,29 @@ if($stat){
 		$useridsocial = $rooo["id_social"];
 
 		$query = "user_id=" . $useridsocial . "&result_type=recent&count=100";
- 
+
+		
 		$result = $cb->statuses_userTimeline($query, true);
 
-
+	
 		if(isset($result) && $result!=""){
-			$js = $result; //json_decode($result,true);
+			$js = new stdClass();
+			$js->statuses = $result; //json_decode($result,true);
 
-			if($js->statuses && is_array($js->statuses) && count($js->statuses)>0){
 
+			//print_r($js);
+
+
+
+			
+			if($js->statuses){//} && is_array($js->statuses) && count($js->statuses)>0){
+
+			
 				foreach ($js->statuses as $status) {
+
+					//print_r($status);
+
+			
 					$holdFor = array();
 						foreach ($words as $w) {
 
@@ -66,7 +79,7 @@ if($stat){
   							$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 							$dbh->beginTransaction();
 
-							$id_social = $status->id;
+							$id_social = $status->id_str;
 							if ($q_exist_content->execute()){
 								if($r1 = $q_exist_content->fetch()){
 									// c'e' gia'

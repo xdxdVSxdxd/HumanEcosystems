@@ -22,34 +22,35 @@ var legend;
     "elementType": "geometry",
     "stylers": [
       { "visibility": "on" },
-      { "color": "#ffffff" }
+      { "color": "#000000" }
     ]
   },{
     "featureType": "poi",
     "elementType": "geometry",
     "stylers": [
       { "visibility": "on" },
-      { "color": "#e7e7e4" }
+      { "color": "#444444" }
     ]
   },{
     "featureType": "road",
     "elementType": "geometry",
     "stylers": [
       { "visibility": "on" },
-      { "color": "#cfced2" }
+      { "color": "#555555" }
     ]
   },{
     "featureType": "transit",
     "elementType": "geometry",
     "stylers": [
       { "visibility": "on" },
-      { "color": "#878597" }
+      { "color": "#666666" }
     ]
   },{
     "featureType": "water",
     "elementType": "geometry",
     "stylers": [
-      { "visibility": "on" }
+      { "visibility": "on" },
+      { "color": "#000066" }
     ]
   }
 ];
@@ -112,11 +113,21 @@ var legend;
             });
 
 
-
+            getRandomUser();
             
 
             
 			}
+
+
+
+      function getContrastYIQ(hexcolor){
+          var r = parseInt(hexcolor.substr(1,2),16);
+          var g = parseInt(hexcolor.substr(3,2),16);
+          var b = parseInt(hexcolor.substr(4,2),16);
+          var yiq = ((r*299)+(g*587)+(b*114))/1000;
+          return (yiq >= 128) ? 'black' : 'white';
+      }
 
 
       function initHeatmaps(){
@@ -126,7 +137,7 @@ var legend;
 
         for(key in legend){
           heatmaps[key] = new google.maps.visualization.HeatmapLayer({ map: map });
-          heatmaps[key].setOptions( {gradient: [  'rgba(255,255,255,0)' , legend[key]   ]  , radius: 20 });          
+          heatmaps[key].setOptions( {gradient: [  'rgba(255,255,255,0)' , legend[key]   ]  , radius: 70, opacity: 0.4, dissipating: true });          
         }
 
         
@@ -136,7 +147,132 @@ var legend;
 
         getTimelineEmotions();
 
+        getEmotionalPosts();
+
       }
+
+
+
+
+
+      var timerUpdater3 = null;
+      var timerDelay3 = 2000;
+
+      var getEmotionalPosts = function(){
+
+        $("#emotinsposts").animate(
+          {
+            top: "-2000px"
+          },500,function(){
+
+              $.getJSON("../../API/getLatestMessagesWithEmotions.php?w=" + project)
+              .done(function(data){
+
+                $("#emotinspostscontainer").html("");
+
+                for(var i = 0; i<data.length; i++){
+
+                  var item = "";
+
+                  item = item + "<div class='emotionalpostitem'>";
+                  item = item + "<div class='emotionalpostitem-image'><img src='" + data[i].iurl + "' width='20' height='20 border='0' /></div>";
+                  item = item + "<div class='emotionalpostitem-user'>" + data[i].nick + "</div>";
+                  item = item + "<div class='emotionalpostitem-emotions'>";
+                  var parts = data[i].color.split(",");
+                  for(var j = 0; j<parts.length; j++){
+                    item = item + "<div class='emotionitem-block' style='background: " + parts[j] + "'></div>";
+                  }
+
+                  item = item + "</div>";
+                  item = item + "</div>";
+
+
+                  $("#emotinspostscontainer").append(item);
+
+
+                  $("#emotinsposts").animate(
+                    {
+                      top: "10px"
+                    },500,function(){
+
+                       if(timerUpdater3!=null){
+                          clearTimeout(timerUpdater3);
+                        }
+                        timerUpdater3 = setTimeout(getEmotionalPosts, timerDelay3);
+                    }
+                  );
+
+                }
+                  
+              })
+              .fail(function( jqxhr, textStatus, error ){
+                  //fare qualcosa in caso di fallimento
+
+                  if(timerUpdater3!=null){
+                    clearTimeout(timerUpdater3);
+                  }
+                  timerUpdater3 = setTimeout(getEmotionalPosts, timerDelay3);
+              });
+
+
+          }
+        );
+
+      };
+
+
+
+      var timerUpdater2 = null;
+      var timerDelay2 = 2000;
+
+      var getRandomUser = function(){
+
+        $("#randomuser").animate(
+          {
+            top: "-300px"
+          },500,function(){
+
+              $.getJSON("../../API/getRandomMessageWithEmotion.php?w=" + project)
+              .done(function(data){
+
+
+                $("#randomuserimage").html("<img src='" + data[0].iurl + "' border='0' />");
+                $("#randomusernick").html(data[0].nick);
+                $("#randomusertext").html(data[0].txt);
+                $("#randomuser").css("background",data[0].color);
+                $("#randomuser").css("color",getContrastYIQ(data[0].color));
+
+
+                $("#randomuser").animate(
+                  {
+                    top: "10px"
+                  },500,function(){
+
+                     if(timerUpdater2!=null){
+                        clearTimeout(timerUpdater2);
+                      }
+                      timerUpdater2 = setTimeout(getRandomUser, timerDelay2);
+                  }
+                );
+                  
+              })
+              .fail(function( jqxhr, textStatus, error ){
+                  //fare qualcosa in caso di fallimento
+
+                  if(timerUpdater1!=null){
+                    clearTimeout(timerUpdater1);
+                  }
+                  timerUpdater1 = setTimeout(getRandomUser, timerDelay1);
+              });
+
+
+          }
+        );
+
+      };
+
+
+
 
       var timerDelay1 = 5000;
       var timerUpdater1 = null;
@@ -149,19 +285,19 @@ var legend;
                 //console.log(data);
 
                 var datas = new Object();
-                datas["Love"] = [];
-                datas["Anger"] = [];
-                datas["Disgust"] = [];
-                datas["Boredom"] = [];
-                datas["Fear"] = [];
-                datas["Hate"] = [];
-                datas["Joy"] = [];
-                datas["Surprise"] = [];
-                datas["Trust"] = [];
-                datas["Sadness"] = [];
-                datas["Anticipation"] = [];
-                datas["Violence"] = [];
-                datas["Terror"] = [];
+                datas["Love"] = new google.maps.MVCArray();
+                datas["Anger"] = new google.maps.MVCArray();
+                datas["Disgust"] = new google.maps.MVCArray();
+                datas["Boredom"] = new google.maps.MVCArray();
+                datas["Fear"] = new google.maps.MVCArray();
+                datas["Hate"] = new google.maps.MVCArray();
+                datas["Joy"] = new google.maps.MVCArray();
+                datas["Surprise"] = new google.maps.MVCArray();
+                datas["Trust"] = new google.maps.MVCArray();
+                datas["Sadness"] = new google.maps.MVCArray();
+                datas["Anticipation"] = new google.maps.MVCArray();
+                datas["Violence"] = new google.maps.MVCArray();
+                datas["Terror"] = new google.maps.MVCArray();
 
                 for(var i = 0; i<data.length; i++){
                   datas[  data[i].label  ].push(  new google.maps.LatLng(  data[i].lat , data[i].lng   )  );
@@ -404,8 +540,6 @@ function updateTimelineData(){
         
       d3.tsv("../../API/getEmotionsTimeline.php?w=" + project, function(error, data) {
           if (error) throw error;
-
-          console.log("[new]");
           
           color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 

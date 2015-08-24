@@ -36,7 +36,7 @@
           height: 20px;
           padding: 10px;
           overflow: hidden;
-          font-family: 'Bad Script', cursive;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 20px;
           line-height: 25px;
           border-bottom: 1px solid #EEEEEE;
@@ -101,6 +101,120 @@
           font: 8px monospace;
         }
 
+        #emotinsposts{
+          width: 220px;
+          height: 350px;
+          position: absolute;
+          top: 10px;
+          left: 185px;
+          z-index: 900;
+          background: rgba(0,0,0,0.6);
+          color: #FFFFFF;
+          overflow: hidden;
+        }
+
+        #emotinspostscontainer{
+          width: 200px;
+          height: 330px;
+          padding: 10px;
+          overflow: hidden; 
+        }
+
+        .emotionalpostitem{
+          width: 200px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          margin-bottom: 4px;
+          overflow: hidden; 
+          clear: auto;
+        }
+
+        .emotionalpostitem-image{
+          float:left;
+          width: 20px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          margin-right: 5px;
+          overflow: hidden; 
+        }
+
+        .emotionalpostitem-user{
+          float:left;
+          width: 70px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+          font: 8px monospace;
+          color: #EEEEEE;
+        }
+
+        .emotionalpostitem-emotions{
+          float:left;
+          width: 105px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+          clear: auto;
+        }
+
+        .emotionitem-block{
+          float:left;
+          width: 12px;
+          height: 12px;
+          padding: 0px;
+          margin: 4px;
+          overflow: hidden;
+        }
+
+        #randomuser{
+          width: 150px;
+          height: 230px;
+          position: absolute;
+          top: -300px;
+          left: 10px;
+          z-index: 900;
+          background: rgba(0,0,0,0.6);
+          color: #FFFFFF;
+          overflow: hidden;
+        }
+
+        #randomuserimage{
+          width: 130px;
+          height: 60px;
+          padding: 10px;
+          overflow: hidden;
+        }
+
+        #randomuserimage img{
+          display: block;
+          width: 60px;
+          height: 60px;
+          margin: auto;
+        }
+        #randomusernick{
+          width: 130px;
+          height: 30px;
+          padding: 10px;
+          overflow: hidden;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 15px;
+          line-height: 18px;
+          text-align: center;
+        }
+        #randomusertext{
+          width: 130px;
+          height: 70px;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-bottom: 10px;
+          overflow: hidden;
+          font: 10px monospace;
+        }
+
 
         .axis path,
         .axis line {
@@ -144,6 +258,14 @@
     <div id="bottom-diagrams">
         <div id="emo-timeline-contained">
         </div>
+    </div>
+    <div id="randomuser">
+        <div id="randomuserimage"></div>
+        <div id="randomusernick"></div>
+        <div id="randomusertext"></div>
+    </div>
+    <div id="emotinsposts">
+        <div id="emotinspostscontainer"></div>
     </div>
 	</body>
 </html>

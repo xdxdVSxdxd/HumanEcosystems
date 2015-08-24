@@ -79,7 +79,7 @@ if($r1){
 
 		if(isset($s[ $idx ])){
 			if(isset($s[ $idx ][$r["label"]])){
-				$s[ $idx ][$r["label"]] = $r["c"];
+				$s[ $idx ][$r["label"]] = $s[ $idx ][$r["label"]] + $r["c"];
 			}
 		}
 

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: he.human-ecosystems.com
--- Generation Time: Aug 23, 2015 at 05:24 AM
+-- Generation Time: Sep 21, 2015 at 09:50 AM
 -- Server version: 5.1.56
--- PHP Version: 5.3.29
+-- PHP Version: 5.4.42
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `hea4ctyua`
+-- Database: `helinz`
 --
 
 -- --------------------------------------------------------
@@ -25,7 +25,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `emotions_words`
 --
 
-DROP TABLE IF EXISTS `emotions_words`;
 CREATE TABLE IF NOT EXISTS `emotions_words` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL,

@@ -1,3 +1,7 @@
+// set to false if you don't want the test mode
+// the test mode introduces some random data so that it can show immediate results right away
+var testing = true;
+
 var map;
 
 var heatmaps;
@@ -67,8 +71,8 @@ var legend;
             markers = new Array();
 
 		        var mapOptions = {
-              center: new google.maps.LatLng(0, 0),
-		          zoom: 3,
+              center: new google.maps.LatLng(48.286, 14.283333),
+		          zoom: 13,
 		          mapTypeId: google.maps.MapTypeId.ROADMAP,
 		          backgroundColor: '#EEEEEE',
 		          mapTypeControl: false,
@@ -119,6 +123,10 @@ var legend;
             
 			}
 
+
+      function getRandomArbitrary(min, max) {
+          return Math.random() * (max - min) + min;
+      }
 
 
       function getContrastYIQ(hexcolor){
@@ -301,6 +309,18 @@ var legend;
 
                 for(var i = 0; i<data.length; i++){
                   datas[  data[i].label  ].push(  new google.maps.LatLng(  data[i].lat , data[i].lng   )  );
+
+
+                  if(Math.random()>0.99){
+
+                    var nlat = parseFloat(data[i].lat) + getRandomArbitrary(-0.01,0.01);
+                    var nlon = parseFloat(data[i].lng)   + getRandomArbitrary(-0.01,0.01);
+
+                    //console.log(nlat + "," + nlon);
+
+                    datas[  data[i].label  ].push(  new google.maps.LatLng(  nlat , nlon  )  );
+                  }
+
                 }
 
                 heatmaps["Love"].setData(datas["Love"]);
@@ -405,6 +425,13 @@ var legend;
 
         var svg;
 
+
+      function getRandomArbitrary(min, max) {
+          return Math.random() * (max - min) + min;
+      }
+
+      var arbitraries = new Object();
+
       function getTimelineEmotions(){
 
         
@@ -472,10 +499,26 @@ var legend;
             return {
               name: name,
               values: data.map(function(d) {
-                return {date: d.date, temperature: +d[name]};
+                var rnd = 0;
+
+                if(testing){
+                  rnd = getRandomArbitrary(0,3);
+                }
+
+                arbitraries[name + d.date] = rnd;
+
+                return {date: d.date, temperature: +(d[name]+rnd)};
               })
             };
           });
+
+          if(Object.keys( arbitraries ).length>2000){
+            while(Object.keys( arbitraries ).length>2000){
+              console.log("remove");
+              var props = Object.keys( arbitraries );
+              delete arbitraries[props[0]];
+            }
+          }
 
           x.domain(d3.extent(data, function(d) { return d.date; }));
 
@@ -551,7 +594,24 @@ function updateTimelineData(){
             return {
               name: name,
               values: data.map(function(d) {
-                return {date: d.date, temperature: +d[name]};
+
+
+                var rnd = 0;
+
+                if(testing){
+
+
+                  if(arbitraries[name + d.date]){
+                    rnd = arbitraries[name + d.date];
+                  } else {
+                    rnd = getRandomArbitrary(0,3);
+                  }
+                
+                  arbitraries[name + d.date] = rnd;
+
+                }
+
+                return {date: d.date, temperature: +(d[name]+rnd)};
               })
             };
           });

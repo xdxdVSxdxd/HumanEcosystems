@@ -1,0 +1,258 @@
+html, body{
+	background: #262A30;
+	color: #FFFFFF;
+	margin: 0px;
+	padding: 0px;
+}
+.row{
+	float: left;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 20px;
+}
+.separator{
+	float: left;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #56657C;
+}
+.block{
+	float: left;
+	margin: 0px;
+	padding: 20px;
+}
+h1{
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 22px;
+}
+h2{
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 14px;
+}
+a.ecosystem-link, a.ecosystem-link:visited{
+	float: left;
+	margin: 0px;
+	padding: 20px;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 50px;
+	text-decoration: none;
+	color: #868D96;
+	transition: color 0.5s;
+	-webkit-transition:: color 0.5s;
+}
+
+a.ecosystem-link:hover{
+	transition: color 0.5s;
+	-webkit-transition:: color 0.5s;
+	color: #FFFFFF;	
+}
+.footer-paragraph{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 10px;
+	text-decoration: none;
+	color: #868D96;
+}
+a.footer-link, a.footer-link:visited{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	color: #868D96;
+	transition: color 0.5s;
+	-webkit-transition:: color 0.5s;
+}
+
+a.footer-link:hover{
+	transition: color 0.5s;
+	-webkit-transition:: color 0.5s;
+	color: #FFFFFF;	
+}
+.footer{
+	margin-top: 30px;
+}
+
+
+
+		#emc1container{
+			position: relative;
+			z-index: 200;
+			width: 100%;
+			height: 100%;
+			background: #262A30;
+			color: #FFFFFF;
+			margin: 0px;
+			padding: 0px;
+		}
+		#classescontainer{
+			position: absolute;
+			z-index: 900;
+			background: transparent;
+			color: #FFFFFF;
+			top: 5px;
+			left: 5px;
+			width: 100px;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		#navContainer{
+			position: absolute;
+			z-index: 900;
+			background: transparent;
+			color: #FFFFFF;
+			top: 5px;
+			right: 5px;
+			width: 100px;
+			padding: 0px;
+			margin: 0px;	
+		}
+		#navContainer a, #navContainer a:visited{
+			display: block;
+			margin: 0px;
+			padding: 0px;
+			margin-bottom: 20px;
+			width: 100px;
+			text-align: right;
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 14px;
+			color: #868D96;
+			text-decoration: none;
+		}
+		#navContainer a:hover{
+			transition: color 0.5s;
+			-webkit-transition:: color 0.5s;
+			color: #FFFFFF;
+		}
+		.legendBox{
+			width: 200px;
+			min-width: 200px;
+			max-width: 200px;
+			overflow: hidden;
+			padding: 0px;
+			margin: 0px;
+			background: inherit;
+			float: left;
+		}
+		.legendcolor{
+			background: inherit;
+			width: 20px;
+			height: 20px;
+			min-width: 20px;
+			min-height: 20px;
+			max-width: 20px;
+			max-height: 20px;
+			overflow: hidden;
+			float: left;
+			padding: 0px;
+			margin: 5px;
+		}
+		.legendname{
+			background: inherit;
+			width: 160px;
+			height: 20px;
+			min-width: 160px;
+			min-height: 20px;
+			max-width: 160px;
+			max-height: 20px;
+			overflow: hidden;
+			float: left;
+			padding: 5px;
+			margin: 0px;
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 12px;
+			color: #FFFFFF;
+		}
+		.legend-highlighted{
+			color: #888888;	
+		}
+		.legendname a,.legendname a:visited{
+			text-decoration: none;
+			color: #009000;
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 12px;
+		}
+		.legendname a:hover,.legendname a:active{
+			color: #00FF00;
+		}
+
+
+		div.bargraphbar{
+			display: inline-block;
+		    width: 4px;
+		    height: 75px;   /* We'll override this later */
+		    background-color: #AAAAAA;
+		    margin-right: 2px;
+		}
+
+		div.bargraphbar:hover{
+			background-color: #FF8000;
+		}
+
+		div.timelines{
+			margin: 0px;
+			margin-bottom: 20px;
+			padding: 20px;
+			height:100px;
+			width: 960px;
+		}
+
+		#emc1container h1{
+			margin-left: 20px;
+			margin-top: 20px;
+			color: #868D96;
+		}
+
+		#emc1container p{
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 12px;
+			color: #EEEEEE;
+			margin-left: 40px;
+			margin-right: 40px;
+		}
+
+		#emc1container p a, #emc1container p a:visited{
+			background: #868D96;
+			padding: 4px;
+			color: #FFFFFF;
+			text-decoration: none;
+			margin: 2px;
+		}
+
+		#emc1container p a:hover{
+			background: #FFFFFF;
+			color: #868D96;	
+		}
+
+		div#infobox{
+			position: absolute;
+			z-index: 9999;
+			bottom: 100px;
+			left: 0px;
+			width: 200px;
+			height: 100px;
+			overflow: hidden;
+			font: 10px Arial,Helvetica,sans-serif;
+			color: #AAAAAA;
+		}
+		div#infobox h1{
+			font-size: 12px;
+			margin: 0px;
+			margin-bottom: 4px;
+		}
+
+		div#infobox a, div#infobox a:visited{
+			font-size: 12px;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+		}
+
+		div#infobox a:hover{
+			color: #FF8000;
+		}

@@ -58,7 +58,18 @@ if(isset($fc) && $fc!=""){
 					$h["idw"] = $w["id_word"];
 					$holdFor[] = $h;
 				}
-				else if(  preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"     , strtoupper( $js["data"][$i]["caption"]["text"] )   )  ||    preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"     , strtoupper( $js["data"][$i]["caption"]["text"] )   )    ){
+				else if(  
+
+					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
+					preg_match(   "/" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
+					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  ||
+
+					preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
+					preg_match(   "/" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
+					preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  				
+
+
+				){
 					$h = array();
 					$h["idc"] = $w["id_class"];
 					$h["idw"] = $w["id_word"];

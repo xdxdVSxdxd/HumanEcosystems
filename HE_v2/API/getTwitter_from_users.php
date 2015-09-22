@@ -63,7 +63,11 @@ if($stat){
 							}
 							else if( $status->text ){
 
-								if(  preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )     ){
+								if(  
+									preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )   || 
+									preg_match(   "/" . strtoupper(  "" . $w["word"] ) . "\b/"   , strtoupper( $status->text )   ) ||
+									preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "/"    , strtoupper( $status->text )   )
+								){
 									$h = array();
 									$h["idc"] = $w["id_class"];
 									$h["idw"] = $w["id_word"];

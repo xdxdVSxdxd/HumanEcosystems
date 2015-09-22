@@ -75,7 +75,7 @@ var svg;
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            d3.json("http://human-ecosystems.com/HE-Linz/API/getMostImportantWordsConnectionsgraph.php?w=" + project, function(graphu) {
+            d3.json("../../API/getMostImportantWordsConnectionsgraph.php?w=" + project, function(graphu) {
             
               var grapho = graphu;
 

@@ -18,32 +18,32 @@ $source = "TWIT";
 	\Codebird\Codebird::setBearerToken($tw_bearer_token);
 
 
+for($wowo = 0; $wowo<count($words); $wowo++ ){
 
-$query = "geocode=" . $mainLat . "," . $mainLng . ",6km&result_type=recent&count=100";
- 
+$query = "";
 
-if($mainLng==999 && $mainLng==999 && $words[0]["word"]!="*"){
-
-	$qq = "";
-	for($i=0 ; $i<count($words) ; $i++){
-		$qq = $qq . $words[$i]["word"];
-		if($i<count($words)-1){
-			$qq = $qq . " OR ";
-		}
-	}
-
-	$query = "q=" . $qq . "&result_type=recent&count=100";
-} else if($mainLng==999 && $mainLng==999 && $words[0]["word"]=="*"){
+if($words[$wowo]["word"]=="*" && $mainLng==999 && $mainLng==999){
+	$query = "q=" . $citycode . "&result_type=recent&count=100";
+} else if($words[$wowo]["word"]!="*" && $mainLng==999 && $mainLng==999){
+	$query = "q=" . $words[$wowo]["word"] . "&result_type=recent&count=100";
+} else if($words[$wowo]["word"]=="*" && $mainLng!=999 && $mainLng!=999){
+	$query = "geocode=" . $mainLat . "," . $mainLng . ",6km&result_type=recent&count=100";
+} else if($words[$wowo]["word"]!="*" && $mainLng!=999 && $mainLng!=999 && $words[$wowo]["isgeo"]==1 ){
+	$query = "geocode=" . $mainLat . "," . $mainLng . ",6km&q=" . $words[$wowo]["word"] . "&result_type=recent&count=100";
+} else if($words[$wowo]["word"]!="*" && $mainLng!=999 && $mainLng!=999 && $words[$wowo]["isgeo"]==0 ){
+	$query = "q=" . $words[$wowo]["word"] . "&result_type=recent&count=100";
+} else {
 	$query = "q=" . $citycode . "&result_type=recent&count=100";
 }
 
+//echo($query);
 
 $result = $cb->search_tweets($query, true);
 
 //echo($result->httpstatus);
 
 
-if(isset($result) && $result!=""){
+if(isset($result) && $result!="" && isset($result->statuses ) ){
 	$js = $result; //json_decode($result,true);
 
 	//print_r($js);
@@ -57,8 +57,14 @@ if(isset($result) && $result!=""){
 				$h["idw"] = $w["id_word"];
 				$holdFor[] = $h;
 			}
-			else if( $status->text ){
-				if(  preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )     ){
+			else if( isset($status->text) ){
+				if(  
+
+					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )   || 
+					preg_match(   "/" . strtoupper(  "" . $w["word"] ) . "\b/"   , strtoupper( $status->text )   ) ||
+					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "/"    , strtoupper( $status->text )   )
+
+				  ){
 					$h = array();
 					$h["idc"] = $w["id_class"];
 					$h["idw"] = $w["id_word"];
@@ -67,6 +73,7 @@ if(isset($result) && $result!=""){
 			}
 		}//foreach ($words as $w) {
 
+		
 		if(count($holdFor)>0){
 
 			try
@@ -206,6 +213,8 @@ if(isset($result) && $result!=""){
 
 
 }//if(isset($fc) && $fc!=""){
+
+}//for($wowo = 0; $wowo<count($words); $wowo++ ){
 
 
 ?>

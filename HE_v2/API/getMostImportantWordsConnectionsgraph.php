@@ -9,6 +9,8 @@ $res->nodes = array();
 $res->links = array();
 
 $q1 = "SELECT id,word,n FROM classifier_words WHERE research='" . $research_code . "' ORDER BY n DESC LIMIT 0,100";
+
+
 $r1 = $dbh->query($q1);
 if($r1){
 	foreach ( $r1 as $row1) {
@@ -23,6 +25,7 @@ if($r1){
 	}
 	$r1->closeCursor();
 }
+
 
 for($i = 0; $i<count($meta); $i++){
 	$w1 = $meta[$i];

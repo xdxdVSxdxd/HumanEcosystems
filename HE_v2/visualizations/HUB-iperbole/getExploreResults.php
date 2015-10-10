@@ -3,22 +3,6 @@
 require_once('../../API/db.php');
 
 
-function utf8ize($d) {
-    if (is_array($d)) 
-        foreach ($d as $k => $v) 
-            $d[$k] = utf8ize($v);
-
-     else if(is_object($d))
-        foreach ($d as $k => $v) 
-            $d->$k = utf8ize($v);
-
-     else 
-        return utf8_encode($d);
-
-    return $d;
-}
-
-
 $results = array();
 
 $results["nodes"] = array();
@@ -37,12 +21,15 @@ function findUser($un,$dbh){
 }
 
 
+$searchString = "";
+if(isset($_REQUEST["search"])){
+	$searchString = $_REQUEST["search"];
+}
 
 
 
-
-		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.nick IN   ( SELECT DISTINCT nick FROM ( SELECT DISTINCT nick , count(*) as c FROM content WHERE research='" . $research_code . "' GROUP BY nick ORDER BY c DESC LIMIT 0,200 ) a )";
-
+if($searchString!=""){
+		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.research='" . $research_code . "' AND UPPER(u.nick) LIKE '%" . strtoupper( str_replace("'", "\'", $searchString)) . "%'";
 
 		$r1 = $dbh->query($q1);
 		if($r1){
@@ -113,6 +100,9 @@ function findUser($un,$dbh){
 			}
 			$r1->closeCursor();
 		}
-//print_r($results);
-echo(json_encode(utf8ize($results)));
+} else {
+	// non ci sono risultati
+}
+
+echo(json_encode($results));
 ?>

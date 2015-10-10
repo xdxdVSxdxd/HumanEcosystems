@@ -3,6 +3,22 @@
 require_once('../../API/db.php');
 
 
+function utf8ize($d) {
+    if (is_array($d)) 
+        foreach ($d as $k => $v) 
+            $d[$k] = utf8ize($v);
+
+     else if(is_object($d))
+        foreach ($d as $k => $v) 
+            $d->$k = utf8ize($v);
+
+     else 
+        return utf8_encode($d);
+
+    return $d;
+}
+
+
 $results = array();
 
 $results["nodes"] = array();
@@ -97,5 +113,5 @@ function findUser($un,$dbh){
 			$r1->closeCursor();
 		}
 
-echo(json_encode($results));
+echo(json_encode(utf8ize($results)));
 ?>

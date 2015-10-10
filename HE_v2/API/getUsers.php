@@ -2,6 +2,21 @@
 
 require_once('db.php');
 
+function utf8ize($d) {
+    if (is_array($d)) 
+        foreach ($d as $k => $v) 
+            $d[$k] = utf8ize($v);
+
+     else if(is_object($d))
+        foreach ($d as $k => $v) 
+            $d->$k = utf8ize($v);
+
+     else 
+        return utf8_encode($d);
+
+    return $d;
+}
+
 $res = array();
 
 $fromID = 0;
@@ -9,7 +24,7 @@ if(isset($_REQUEST["fromID"])){
 	$fromID = $_REQUEST["fromID"];
 }
 
-$q1 = "SELECT * FROM users WHERE research='" . $research_code . "' AND id>=" . $fromID . " ORDER BY id ASC LIMIT 0,1000 ";
+$q1 = "SELECT * FROM users WHERE research='" . $research_code . "' AND id>=" . $fromID . " ORDER BY id DESC LIMIT 0,1000 ";
 $r1 = $dbh->query($q1);
 if($r1){
 	foreach ( $r1 as $row1) {
@@ -27,6 +42,6 @@ if($r1){
 }
 
 
-echo( json_encode($res) );
+echo( json_encode(utf8ize($res)) );
 
 ?>

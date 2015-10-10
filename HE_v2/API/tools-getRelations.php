@@ -2,6 +2,21 @@
 
 require_once('db.php');
 
+function utf8ize($d) {
+    if (is_array($d)) 
+        foreach ($d as $k => $v) 
+            $d[$k] = utf8ize($v);
+
+     else if(is_object($d))
+        foreach ($d as $k => $v) 
+            $d->$k = utf8ize($v);
+
+     else 
+        return utf8_encode($d);
+
+    return $d;
+}
+
 $result = array();
 
 
@@ -18,9 +33,10 @@ $result = array();
 				$n["index"] = $i;
 				$n["id"] = $row1["id"];
 				$n["nick"] = $row1["nick"];
+				if($n["nick"]==""){ $n["nick"] = "a"; }
 				$n["profile_url"] = $row1["profile_url"];
 
-				$reflinks[$row1["nick"]] = $i;
+				$reflinks[$n["nick"]] = $i;
 				
 				$i++;
 
@@ -62,6 +78,6 @@ $result = array();
 
 
 
-echo(json_encode($result));
+echo(json_encode(utf8ize($result)  ));
 
 ?>

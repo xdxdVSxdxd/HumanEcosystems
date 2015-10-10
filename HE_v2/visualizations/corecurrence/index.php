@@ -6,6 +6,7 @@
     <link href='http://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
 		<style>
 	    	html,body{
+	    		cursor:none;
 	    		width: 100%;
 	    		height: 100%;
 	    		padding: 0px;
@@ -14,6 +15,7 @@
           color: #FFFFFF;
 	    	}
         #vizholder{
+        	cursor:none;
           width: 100%;
           height: 100%;
           padding: 0px;
@@ -39,7 +41,7 @@
 
         text{
           font-family: Helvetica;
-          font-size: 6px;
+          font-size: 8px;
           fill: #FFFFFF;
           stroke: none;
           opacity: 0.4;

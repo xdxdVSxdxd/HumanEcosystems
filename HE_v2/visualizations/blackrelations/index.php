@@ -5,7 +5,11 @@
 	<link href="css/style.css" rel="stylesheet">
 
 	<style>
+		*{
+			cursor:none;
+		}
 		html,body{
+			cursor:none;
 			margin: 0px;
 			padding: 0px;
 			background: #000000;
@@ -18,6 +22,7 @@
 
 		
 		#wrapper{
+			cursor:none;
 			margin: 0px;
 			padding: 0px;
 			background: #000000;

@@ -5,7 +5,11 @@
 		<meta charset="utf-8" />
     <link href='http://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
 		<style>
+        *{
+          cursor: none;
+        }
 	    	html,body{
+	    		cursor: none;
 	    		width: 100%;
 	    		height: 100%;
 	    		padding: 0px;
@@ -14,6 +18,7 @@
           color: #FFFFFF;
 	    	}
         #vizholder{
+          cursor: none;
           width: 100%;
           height: 100%;
           padding: 0px;
@@ -24,6 +29,7 @@
           left: 0px; 
         }
         #wordgraph{
+        	cursor: none;
           width: 50%;
           height: 100%;
           padding: 0px;
@@ -32,12 +38,14 @@
           background: #000000;
         }
         #wordgraphcontainer{
+        	cursor: none;
           width: 100%;
           height: 100%;
           padding: 0px;
           margin: 0px;
         }
         #tagcloud{
+        	cursor: none;
           width: 50%;
           height: 100%;
           padding: 0px;
@@ -47,6 +55,7 @@
         }
 
         #tagcloudcontainer{
+        	cursor: none;
           width: 100%;
           height: 100%;
           padding: 0px;
@@ -54,6 +63,7 @@
         }
 
         #wordgraphtitle{
+        	cursor: none;
           width: 45%;
           padding: 0px;
           margin: 0px;
@@ -82,7 +92,7 @@
 
         .nodetext{
           stroke: none;
-          fill: rgba(255,255,255,0.5);
+          fill: rgba(255,255,255,0.8);
           font: 8px Helvetica;
         }
 

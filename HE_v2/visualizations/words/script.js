@@ -76,7 +76,8 @@
 
             d3.json("../../API/getMostImportantWords.php?w=" + project, function(error, json) {
             //d3.json("README.json", function(error, json) {
-              if (error) throw error;
+              //if (error) throw error;
+              if(error) genTagCloud();
 
               //console.log(json);
 
@@ -171,7 +172,7 @@
       };
 
       var minnn = 2;
-      var maxnn = 7;
+      var maxnn = 4;
 
       var timergraph = null;
       var timergraphdelay = 10000;
@@ -184,7 +185,9 @@
           var numero = Math.floor(Math.random() * (maxnn - minnn + 1)) + minnn;
 
           d3.json("../../API/getNWordsAndConnectionsGraph.php?w=" + project + "&n=" + numero, function(error, data) {
-            if (error) throw error;
+            //if (error) throw error;
+
+            if (error) renderWordGraph();
 
             var meta = data.meta;
 

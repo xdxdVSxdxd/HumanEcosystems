@@ -112,7 +112,7 @@ if(isset($fc) && $fc!=""){
 								// c'e' gia'
 								$id_user = $r2["id"];
 								$nick = $js["data"][$i]["user"]["full_name"];
-								$profile_url = $js["data"][$i]["user"]["profile_picture"];
+								$profile_url = "https://instagram.com/" . $js["data"][$i]["user"]["username"];
 								$image_url = $js["data"][$i]["user"]["profile_picture"];
 								//echo("user presente:<br />");
 								//print_r($id_user);
@@ -121,7 +121,7 @@ if(isset($fc) && $fc!=""){
 								// se non c'e' lo creo -->user_id
 								//echo("content NON presente<br />");
 								$nick = $js["data"][$i]["user"]["full_name"];
-								$profile_url = $js["data"][$i]["user"]["profile_picture"];
+								$profile_url = "https://instagram.com/" . $js["data"][$i]["user"]["username"];
 								$image_url = $js["data"][$i]["user"]["profile_picture"];
 								$q_insert_user->execute();
 								$id_user = $dbh->lastInsertId();

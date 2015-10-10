@@ -41,7 +41,7 @@ function findUser($un,$dbh){
 
 
 
-		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.nick IN   ( SELECT DISTINCT nick FROM ( SELECT DISTINCT nick , count(*) as c FROM content WHERE research='" . $research_code . "' GROUP BY nick ORDER BY c DESC LIMIT 0,200 ) a )";
+		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.nick IN   ( SELECT DISTINCT nick FROM ( SELECT DISTINCT nick , count(*) as c FROM content WHERE research='" . $research_code . "' GROUP BY nick ORDER BY c DESC LIMIT 0,500 ) a )";
 
 
 		$r1 = $dbh->query($q1);

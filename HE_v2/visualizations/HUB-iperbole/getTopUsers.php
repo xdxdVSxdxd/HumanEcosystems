@@ -37,8 +37,11 @@ function findUser($un,$dbh){
 }
 
 
+		$q0 = "SET SESSION max_heap_table_size=536870912";
+		$r0 = $dbh->query($q0);
 
-
+		$q0 = "SET SESSION tmp_table_size=536870912;";
+		$r0 = $dbh->query($q0);
 
 
 		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u WHERE u.nick IN   ( SELECT DISTINCT nick FROM ( SELECT DISTINCT nick , count(*) as c FROM content WHERE research='" . $research_code . "' GROUP BY nick ORDER BY c DESC LIMIT 0,500 ) a )";

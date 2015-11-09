@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: he.human-ecosystems.com
--- Generation Time: Sep 21, 2015 at 09:50 AM
--- Server version: 5.1.56
--- PHP Version: 5.4.42
+-- Generation Time: Oct 26, 2015 at 07:21 AM
+-- Server version: 5.6.25
+-- PHP Version: 5.6.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,25 +16,27 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `helinz`
+-- Database: `hebo`
 --
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `emotions_words`
+-- Dumping data for table `emotions`
 --
 
-CREATE TABLE IF NOT EXISTS `emotions_words` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `idemotion` bigint(20) NOT NULL,
-  `lang` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNI-EMO-WO` (`word`,`idemotion`,`lang`),
-  KEY `idemotion` (`idemotion`),
-  KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=904 ;
+INSERT INTO `emotions` (`id`, `name`, `label`, `color`) VALUES
+(1, 'love', 'Love', '#FF8080'),
+(2, 'anger', 'Anger', '#800000'),
+(3, 'disgust', 'Disgust', '#800080'),
+(4, 'boredom', 'Boredom', '#DD00DD'),
+(5, 'fear', 'Fear', '#00FF00'),
+(6, 'hate', 'Hate', '#FF0000'),
+(7, 'joy', 'Joy', '#FFFF00'),
+(8, 'surprise', 'Surprise', '#0060FF'),
+(9, 'trust', 'Trust', '#60FF00'),
+(10, 'sadness', 'Sadness', '#0000FF'),
+(11, 'anticipation', 'Anticipation', '#FF8000'),
+(12, 'violence', 'Violence', '#FF4000'),
+(13, 'terror', 'Terror', '#008000');
 
 --
 -- Dumping data for table `emotions_words`

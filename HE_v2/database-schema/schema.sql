@@ -1,12 +1,50 @@
-CREATE TABLE `classes` (
+-- phpMyAdmin SQL Dump
+-- version 3.3.10.4
+-- http://www.phpmyadmin.net
+--
+-- Host: he.human-ecosystems.com
+-- Generation Time: Oct 26, 2015 at 07:18 AM
+-- Server version: 5.6.25
+-- PHP Version: 5.6.10
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `hebo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classes`
+--
+
+DROP TABLE IF EXISTS `classes`;
+CREATE TABLE IF NOT EXISTS `classes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   `research` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `isgeodependent` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `isgeodependent` (`isgeodependent`),
+  KEY `research` (`research`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
-CREATE TABLE `classifier_corecmessage` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classifier_corecmessage`
+--
+
+DROP TABLE IF EXISTS `classifier_corecmessage`;
+CREATE TABLE IF NOT EXISTS `classifier_corecmessage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `idcorr` bigint(20) NOT NULL,
   `idcontent` bigint(20) NOT NULL,
@@ -19,9 +57,16 @@ CREATE TABLE `classifier_corecmessage` (
   KEY `t` (`t`),
   KEY `n` (`n`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4915753 ;
 
-CREATE TABLE `classifier_corecurrence` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classifier_corecurrence`
+--
+
+DROP TABLE IF EXISTS `classifier_corecurrence`;
+CREATE TABLE IF NOT EXISTS `classifier_corecurrence` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `idw1` bigint(20) NOT NULL,
   `idw2` bigint(20) NOT NULL,
@@ -31,9 +76,16 @@ CREATE TABLE `classifier_corecurrence` (
   KEY `idw1` (`idw1`,`idw2`),
   KEY `n` (`n`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2755811 ;
 
-CREATE TABLE `classifier_words` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classifier_words`
+--
+
+DROP TABLE IF EXISTS `classifier_words`;
+CREATE TABLE IF NOT EXISTS `classifier_words` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `n` int(11) NOT NULL,
@@ -42,9 +94,16 @@ CREATE TABLE `classifier_words` (
   KEY `word` (`word`),
   KEY `n` (`n`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=103929 ;
 
-CREATE TABLE `content` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `content`
+--
+
+DROP TABLE IF EXISTS `content`;
+CREATE TABLE IF NOT EXISTS `content` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_social` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_user` bigint(20) NOT NULL,
@@ -74,10 +133,16 @@ CREATE TABLE `content` (
   KEY `research` (`research`),
   KEY `language` (`language`),
   KEY `processed_classification` (`processed_classification`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=70360 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `content_to_class` (
+--
+-- Table structure for table `content_to_class`
+--
+
+DROP TABLE IF EXISTS `content_to_class`;
+CREATE TABLE IF NOT EXISTS `content_to_class` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_content` bigint(20) NOT NULL,
   `id_class` bigint(20) NOT NULL,
@@ -88,10 +153,16 @@ CREATE TABLE `content_to_class` (
   KEY `id_class` (`id_class`),
   KEY `id_word` (`id_word`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=71720 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `emotions` (
+--
+-- Table structure for table `emotions`
+--
+
+DROP TABLE IF EXISTS `emotions`;
+CREATE TABLE IF NOT EXISTS `emotions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `label` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -99,44 +170,47 @@ CREATE TABLE `emotions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
+-- --------------------------------------------------------
 
-INSERT INTO `emotions` (`id`, `name`, `label`, `color`) VALUES
-(1, 'love', 'Love', '#FF8080'),
-(2, 'anger', 'Anger', '#800000'),
-(3, 'disgust', 'Disgust', '#800080'),
-(4, 'boredom', 'Boredom', '#DD00DD'),
-(5, 'fear', 'Fear', '#00FF00'),
-(6, 'hate', 'Hate', '#FF0000'),
-(7, 'joy', 'Joy', '#FFFF00'),
-(8, 'surprise', 'Surprise', '#0060FF'),
-(9, 'trust', 'Trust', '#60FF00'),
-(10, 'sadness', 'Sadness', '#0000FF'),
-(11, 'anticipation', 'Anticipation', '#FF8000'),
-(12, 'violence', 'Violence', '#FF4000'),
-(13, 'terror', 'Terror', '#008000');
+--
+-- Table structure for table `emotions_content`
+--
 
-
-CREATE TABLE `emotions_content` (
+DROP TABLE IF EXISTS `emotions_content`;
+CREATE TABLE IF NOT EXISTS `emotions_content` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_content` bigint(20) NOT NULL,
   `id_emotion` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_content` (`id_content`,`id_emotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=108934 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `emotions_words` (
+--
+-- Table structure for table `emotions_words`
+--
+
+DROP TABLE IF EXISTS `emotions_words`;
+CREATE TABLE IF NOT EXISTS `emotions_words` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `idemotion` bigint(20) NOT NULL,
   `lang` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `UNI-EMO-WO` (`word`,`idemotion`,`lang`),
   KEY `idemotion` (`idemotion`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=904 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `relations` (
+--
+-- Table structure for table `relations`
+--
+
+DROP TABLE IF EXISTS `relations`;
+CREATE TABLE IF NOT EXISTS `relations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nick1` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `nick2` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -148,10 +222,16 @@ CREATE TABLE `relations` (
   KEY `nick1_2` (`nick1`,`nick2`),
   KEY `c` (`c`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2520 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `research` (
+--
+-- Table structure for table `research`
+--
+
+DROP TABLE IF EXISTS `research`;
+CREATE TABLE IF NOT EXISTS `research` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `label` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -166,10 +246,16 @@ CREATE TABLE `research` (
   KEY `label` (`label`),
   KEY `clat` (`clat`,`clon`),
   KEY `minlat` (`minlat`,`minlon`,`maxlat`,`maxlon`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `users` (
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_social` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nick` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -184,10 +270,16 @@ CREATE TABLE `users` (
   KEY `source` (`source`),
   KEY `research` (`research`),
   KEY `processusers` (`processusers`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27713 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `words` (
+--
+-- Table structure for table `words`
+--
+
+DROP TABLE IF EXISTS `words`;
+CREATE TABLE IF NOT EXISTS `words` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_class` bigint(20) NOT NULL,
   `word` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -197,4 +289,4 @@ CREATE TABLE `words` (
   KEY `id_class` (`id_class`),
   KEY `t` (`t`),
   KEY `research` (`research`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;

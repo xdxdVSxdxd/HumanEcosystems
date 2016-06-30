@@ -1,0 +1,974 @@
+/* Element invisible fix	*/
+.element-invisible {
+  margin: 0;
+  padding: 0;
+  width: 1px;
+}
+
+.element-invisible {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+    overflow: hidden;
+    height: 1px;
+}
+
+.header {
+    font-family: 'Roboto', sans-serif;
+    img {
+      width: auto;
+      max-width: 100%;
+    }
+}
+
+.header-social {
+    background-color: #f1f1f2;
+}
+
+.header-logos {
+    padding: 0px;
+}
+
+h2.hub-lead{
+    line-height: 109px;
+    vertical-align: middle;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.viz-caption{
+    margin-bottom: 25px;
+}
+
+.viz-holder{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.HUB-content p a, .HUB-content p a:visited{
+    text-decoration: underline;
+}
+
+.HUB-content p a:hover{
+    color: #E11A22;
+}
+
+.HUB-content p a:active{
+    color: #FF0000;
+}
+
+@media (min-width: 992px)   {
+    .logo-iperbole  {
+        padding-top:32px;
+    }
+    #legend{
+        width: 200px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px)   {
+    .logo-iperbole  {
+        padding-top:10px;
+    }
+    #legend{
+        width: 200px;
+    }
+}
+
+
+
+.logo-comune {
+  margin-right: 15px;
+}
+
+.header-menu {
+    background-color: #E6E7E8;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.4) inset;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.col-twitter {
+    border-right: 1px solid #dadada;
+    margin-top: 0;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+#twit_profile {
+    float: left;
+    margin: 5px;
+}
+
+#twit_profile img {
+    width: 35px;
+}
+
+#twit {
+    font-size: 0.8em;
+    padding-top: 2px;
+}
+
+#twit .extname {
+    color: #000;
+    font-weight: 700;
+}
+
+#twit .twittername {
+    color: #999;
+}
+
+#twit .text {
+    
+}
+
+#twit .text a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.col-contact,
+.col-social,
+.col-search {
+  float: right;
+}
+
+.col-contact {
+  font-size: 0.9em;
+  margin-right: 10px;
+  padding-top: 15px;
+  color: #333;
+}
+
+.col-contact .iperbole-mail,
+.col-contact .iperbole-newsletter {
+  border-right: 1px solid #999;
+  float: left;
+  padding: 0 5px;
+  text-align: right;
+}
+
+.col-contact a {
+  color: #333;
+}
+
+.col-contact .iperbole-contact {
+  float: left;
+  padding: 0 5px;
+}
+
+.col-social {
+  padding: 0;
+}
+
+.navbar-form .input-group button.btn {
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: none;
+    font-size: 12px;
+    height: 24px;
+    padding: 4px 6px;
+}
+
+.navbar-form .input-group input#srch-term {
+    border: 1px solid #fff;
+    box-shadow: none;
+    font-size: 0.875em;
+    height: 24px;
+    width: 100%;
+}
+
+.header form.navbar-form {
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.navbar-form label  {
+    display:none;
+}
+
+.btn-label  {
+    font-size: 0;
+    height: 1px;
+    overflow: hidden;
+    display: block;
+}
+
+.btn-search {
+    top:-1px;
+}
+
+.col-search {
+    padding-top: 5px;
+}
+
+.btn	{
+	border:0 none;
+}
+
+.header-menu ul.menu {
+    margin-bottom: 0;
+    margin-top: 5px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.header-menu ul.menu li {
+    float: left;
+    list-style: none outside none;
+    margin: 0 0 -3px 10px;
+}
+
+.header-menu ul.menu li a {
+    color: #444;
+    display: block;
+    font-size: 1.4em;
+    font-weight: 700;
+    padding: 4px 30px;
+    margin-bottom: 3px;
+}
+
+.header-menu ul.menu li.active a {
+    background: none repeat scroll 0 0 #007CB9;
+    color: #fff;
+}
+
+.header-logos img {
+    max-height: 120px;
+    max-width: 100%;
+}
+
+.logo-ebologna {
+}
+
+img.logo-retecivica {
+}
+
+.logo-comune {
+}
+
+.col-social .social {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.header .social a {
+    float: left;
+    height: 24px;
+    margin: 2px;
+    width: 24px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.header .social a span  {
+    display: none;
+}
+
+.header .social a.tw {
+    background-image: url("../img/twitter-grigio.png");
+}
+
+.header .social a.tw:hover {
+    background-image: url("../img/twitter.png");
+}
+
+.header .social a.fb {
+    background-image: url("../img/facebook-grigio.png");
+}
+
+.header .social a.fb:hover {
+    background-image: url("../img/facebook.png");
+}
+
+.header .social a.fl {
+    background-image: url("../img/flickr-grigio.png");
+}
+
+.header .social a.fl:hover {
+    background-image: url("../img/flickr.png");
+}
+
+.header .social a.pt {
+    background-image: url("../img/pinterest-grigio.png");
+}
+
+.header .social a.pt:hover {
+    background-image: url("../img/pinterest.png");
+}
+
+.header .social a.yt {
+    background-image: url("../img/youtube-grigio.png");
+}
+
+.header .social a.yt:hover {
+    background-image: url("../img/youtube.png");
+}
+
+.header .social a.instagram {
+    background-image: url("../img/instagram-grigio.png");
+}
+
+.header .social a.instagram:hover {
+    background-image: url("../img/instagram.png");
+}
+
+.header .social a.rss {
+    background-image: url("../img/rss-grigio.png");
+}
+
+.header .social a.rss:hover {
+    background-image: url("../img/rss.png");
+}
+
+.header .user-buttons  {
+    font-size: 1em;
+    float: right; 
+    .picture {
+        float: left;
+        margin-top: 1px;
+        margin-right: 15px;
+        font-size: 0.7em;
+        max-height: px;
+        overflow: hidden;
+        max-width: 38px;
+
+        img {
+            width: 38px;
+            height: auto;
+            padding: 2px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+    }
+    
+    .user-links {
+        margin-top: 1px;
+        float: left;
+        
+        .login {
+            float: left;
+            border-right: 1px solid #fff;
+            padding-right: 10px;
+        }
+        
+        .logout {
+            float: left;
+            padding-left: 10px;
+        }
+        
+        a {
+            color: #333;
+            display: block;
+            font-weight: 700;
+        }
+    }
+    
+    .user-not-logged {
+        margin-top: 16px;
+        
+        p {
+          display: inline;
+        }
+        
+        a {
+            color: #333;
+            font-weight: 700;
+        }
+    }
+}
+
+.panel-login {
+    border-top: 0 none;
+}
+
+.panel-login .panel-heading {}
+
+.panel-login .login-logo {
+    background: none repeat scroll 0 0 #626463;
+    margin: -15px -15px 0;
+    padding: 15px;
+}
+
+.panel-login .login-logo img {}
+
+.panel-login .login-body {
+    font-size: 1.2em;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.panel-login .login-body strong {
+    font-size: 1.4em;
+}
+
+.panel-login .login-body .login-links {
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
+    margin: 20px 0;
+    padding: 20px 0;
+}
+
+.panel-login .login-body .login-links a {
+    color: #333;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.panel-login .login-body p {
+    margin-bottom: 20px;
+}
+
+.panel-login .login-body .login-links ul.social-links {
+    list-style: none outside none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.panel-login .login-body .login-links .social-links img {
+    height: auto;
+    margin: 0 2px;
+    width: 36px;
+}
+
+.panel-login .login-body .login-links .social-links img:hover {
+    opacity: 0.9;
+}
+
+.panel-login .login-body a.federa-login {
+    background: none repeat scroll 0 0 #626463;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: block;
+    margin: 35px auto 0;
+    padding: 6px 0;
+    width: 300px;
+}
+
+.panel-login .login-body a.federa-login strong {
+    font-size: 1em;
+    text-decoration: underline;
+}
+
+.header-logos-mobile {
+  display: none;
+}
+
+.navbar-nav > li {
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+
+    #emotinsposts{
+        display: none;
+    }
+
+    #legend{
+        width: 100px;
+    }
+
+    .col-search {
+        float: right;
+        padding-top: 0;
+    }
+    
+    .col-search form {
+        padding-bottom: 4px;
+        padding-right: 0;
+        padding-top: 2px;
+    }
+    
+    .col-twitter, .col-contact, .col-social {
+        display: none;
+    }
+    
+    .logo-comune, .logo-ebologna {
+        display: none;
+    }
+    
+    .header-menu ul.menu li {
+        margin: 0 0 0 4px;
+    }
+    
+    .header-menu ul.menu li a {
+        color: #444;
+        display: block;
+        font-size: 1em;
+        font-weight: 700;
+        padding: 10px;
+    }
+    
+    .header .user-buttons {
+        font-size: 0.8em;
+        margin: 0px;
+        text-align: right;
+    }
+    
+    .header .user-links {
+        display: none;
+    }
+    
+    .header .user-buttons {
+      padding: 0;
+       
+    }
+    
+    .header .user-buttons .picture  {
+        margin-top:4px;
+        margin-right: -6px;
+    }
+    
+    .header .user-buttons .picture img {
+      margin-bottom: 0;
+      width: 35px;
+    }
+    
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+      border-bottom: 0 none;
+        max-height: 38px;
+    }
+    
+    .navbar-default .navbar-nav a, .navbar-default .navbar-nav a:hover, .navbar-default .navbar-nav a:focus {
+      font-size: 1em;
+    }
+    
+    .header .user-buttons .user-not-logged {
+      margin-right: 2px;
+      margin-top: 16px;
+      
+      p {
+        display: none;
+      }
+      
+      span {
+        cursor: pointer;
+        display: block;
+        font-size: 1.4em;
+        padding: 15px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+    
+    .header-logos {
+      display: none;
+    }
+    
+    .header-logos-mobile {
+      display: block;
+    }
+	
+	.header-logos-mobile img {
+      max-width:100%;
+    }
+}
+
+
+
+
+
+        #mapholder{
+            width: 100%;
+            height: 500px;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            z-index: 100;
+        }
+
+        #legend{
+          height: 311px;
+          position: relative;
+          z-index: 900;
+          background: rgba(0,0,0,0.3);
+          color: #FFFFFF;
+          overflow: hidden;
+          float: left;
+        }
+        #legend-head{
+          width: 180px;
+          padding: 10px;
+          overflow: hidden;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 20px;
+          line-height: 25px;
+          border-bottom: 1px solid #EEEEEE;
+        }
+        #legend-body{
+          width: 180px;
+          height: 258px;
+          padding: 10px;
+          overflow: hidden;
+        }
+
+        .legend-item-holder{
+          width: 180px;
+          height: 15px;
+          margin-bottom: 4px;
+          overflow: hidden;
+          color: #FFFFFF;
+          font: 12px Helvetica,sans-serif;
+          line-height: 15px;
+          clear: auto;
+        }
+        .legend-color{
+          width: 15px;
+          height: 15px;
+          margin-right: 12px;
+          overflow: hidden;
+          float: left;
+        }
+        .legend-lebel{
+          width: 153px;
+          height: 15px;
+          overflow: hidden;
+          float: left;
+        }
+
+        a,a:visited{
+          color: #333333;
+          text-decoration: none;
+        }
+        a:hover{
+          color: #555555;
+          text-decoration: none;
+        }
+        .infowdiv{
+          text-decoration: none;
+          color: #333333;
+          font: 13px Helvetica, Arial, sans-serif;
+          padding: 2px;
+          margin: 6px;
+        }
+
+        #bottom-diagrams{
+          width: 100%;
+          height: 100px;
+          position: relative;
+          top: -377px;
+          left: 0px;
+          z-index: 900;
+          background: rgba(0,0,0,1);
+          color: #FFFFFF;
+          overflow: hidden;
+          font: 8px monospace;
+          border-top: 1px solid #555555;
+        }
+
+        .emotionalmaptotalholder{
+            width: 100%;
+            height: 573px;
+            overflow: hidden;
+        }
+
+        .emotionalmapinterfaceholder{
+            width: 100%;
+            position: relative;
+            top: -500px;
+            float: left;
+        }
+
+        #emotinsposts{
+          width: 220px;
+          height: 350px;
+          position: relative;
+          z-index: 900;
+          background: rgba(0,0,0,0.6);
+          color: #FFFFFF;
+          overflow: hidden;
+          float: right;
+        }
+
+        #emotinspostscontainer{
+          width: 200px;
+          height: 330px;
+          padding: 10px;
+          overflow: hidden; 
+        }
+
+        .emotionalpostitem{
+          width: 200px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          margin-bottom: 4px;
+          overflow: hidden; 
+          clear: auto;
+        }
+
+        .emotionalpostitem-image{
+          float:left;
+          width: 20px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          margin-right: 5px;
+          overflow: hidden; 
+        }
+
+        .emotionalpostitem-user{
+          float:left;
+          width: 70px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+          font: 8px monospace;
+          color: #EEEEEE;
+        }
+
+        .emotionalpostitem-emotions{
+          float:left;
+          width: 105px;
+          height: 20px;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+          clear: auto;
+        }
+
+        .emotionitem-block{
+          float:left;
+          width: 12px;
+          height: 12px;
+          padding: 0px;
+          margin: 4px;
+          overflow: hidden;
+        }
+
+        #randomuser{
+          width: 150px;
+          height: 230px;
+          position: absolute;
+          top: 10px;
+          left: 26px;
+          z-index: 900;
+          background: rgba(0,0,0,0.6);
+          color: #FFFFFF;
+          overflow: hidden;
+          display: none;
+        }
+
+        #randomuserimage{
+          width: 130px;
+          height: 60px;
+          padding: 10px;
+          overflow: hidden;
+        }
+
+        #randomuserimage img{
+          display: block;
+          width: 60px;
+          height: 60px;
+          margin: auto;
+        }
+        #randomusernick{
+          width: 130px;
+          height: 30px;
+          padding: 10px;
+          overflow: hidden;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 15px;
+          line-height: 18px;
+          text-align: center;
+        }
+        #randomusertext{
+          width: 130px;
+          height: 70px;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-bottom: 10px;
+          overflow: hidden;
+          font: 10px monospace;
+        }
+
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #FFFFFF;
+          shape-rendering: crispEdges;
+        }
+
+        .axis text{
+          fill: #FFFFFF;
+          stroke: none;
+        }
+
+        .x.axis path {
+          display: none;
+        }
+
+        .line {
+          fill: none;
+          stroke: steelblue;
+          stroke-width: 1.5px;
+        }
+
+
+
+
+
+#wordgraph{
+          width: 50%;
+          height: 100%;
+          padding: 0px;
+          margin: 0px;
+          float: left;
+          background: #000000;
+        }
+        #wordgraphcontainer{
+          width: 100%;
+          height: 100%;
+          padding: 0px;
+          margin: 0px;
+        }
+        #tagcloud{
+          width: 50%;
+          height: 100%;
+          padding: 0px;
+          margin: 0px;
+          float: left;
+          background: #00FF00;
+        }
+
+        #tagcloudcontainer{
+          width: 100%;
+          height: 100%;
+          padding: 0px;
+          margin: 0px;
+        }
+
+        #wordgraphtitle{
+          width: 45%;
+          padding: 0px;
+          margin: 0px;
+          position: absolute;
+          z-index: 400;
+          top: 10px;
+          left: 30px;
+          background: transparent;
+          color: rgba(255,255,255,0.9);
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 20px;
+          line-height: 28px;
+        }
+
+        #results{
+            background: #000000;
+        }
+
+
+        .node {
+          stroke: none;
+          fill: rgba(0,255,0,1);
+        }
+
+        .link {
+          fill: none;
+          stroke: rgba(200,200,200,0.5);
+        }
+
+        .nodetext{
+          stroke: none;
+          fill: rgba(255,255,255,0.5);
+          font: 8px Helvetica;
+        }
+
+        .tccircle{
+          fill: #000000;
+          stroke: none;
+        }
+
+        .tctext{
+          fill: #FFFFFF;
+          stroke: none;
+          font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+          text-anchor: middle;
+          pointer-events: none;
+        }
+
+        .linkexplore{
+            fill: none;
+            stroke: rgba(200,200,200,0.5);
+        }
+
+        .nodetextexplore{
+            fill: #FFFFFF;
+            stroke: none;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-anchor: left;
+            pointer-events: none;
+        }
+
+
+.footer{
+    background: #f1f1f2;
+    padding-top: 12px;
+    margin-top: 25px;
+    border-top: 1px solid #a1a1a1;
+    overflow: auto;
+}
+
+ul.navmenufooter{
+    display: block;
+    list-style: none;
+}
+
+ul.navmenufooter li.expanded{
+    color: #000000;
+    font: bold 16px Helvetica,Arial,sans-serif;
+    border-bottom: 1px solid #333333;
+    line-height: 18px;
+    padding: 2px;
+}
+
+ul.navmenufooter li.itemfooter{
+    color: #444444;
+    font: 14px Helvetica,Arial,sans-serif;
+    line-height: 16px;
+    padding: 2px;
+}
+
+.footercredits{
+    float: left;
+    width: 100%;
+    font: 10px monospace;
+    color: #666666;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.footercredits p{
+    padding: 40px;
+}
+
+.footercol{
+    float: left;
+    width: 33%;
+}
+
+.noticebox{
+  margin: 20px;
+  padding: 20px;
+  font: 12px Helvetica, Arial, sans-serif;
+  line-height: 15px;
+  color: #EEEEEE;
+  background: #000000;
+}
+
+.noticebox p{
+  margin-bottom: 4px;
+}
+
+.noticebox a, .noticebox a:visited{
+  color: #AAAA00;
+}
+
+.noticebox a:hover{
+  color: #FFFF00;
+}

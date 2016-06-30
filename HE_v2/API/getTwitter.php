@@ -36,7 +36,7 @@ if($words[$wowo]["word"]=="*" && $mainLng==999 && $mainLng==999){
 	$query = "q=" . $citycode . "&result_type=recent&count=100";
 }
 
-//echo($query);
+//echo($query . "<br/>");
 
 $result = $cb->search_tweets($query, true);
 
@@ -58,11 +58,25 @@ if(isset($result) && $result!="" && isset($result->statuses ) ){
 				$holdFor[] = $h;
 			}
 			else if( isset($status->text) ){
+
+				$wos =  explode(" ", $w["word"]);
+				$foundw = true;
+				for($i = 0 ; $i<count($wos)&&$foundw;$i++){
+					if(  
+						preg_match(   "/\b" . strtoupper(  "" . $wos[$i] ) . "\b/"    , strtoupper( $status->text )   )   || 
+						preg_match(   "/" . strtoupper(  "" . $wos[$i] ) . "\b/"   , strtoupper( $status->text )   ) ||
+						preg_match(   "/\b" . strtoupper(  "" . $wos[$i] ) . "/"    , strtoupper( $status->text )   )
+
+					){
+						$foundw = true;
+					} else {
+						$foundw = false;
+					}
+				}
+
 				if(  
 
-					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $status->text )   )   || 
-					preg_match(   "/" . strtoupper(  "" . $w["word"] ) . "\b/"   , strtoupper( $status->text )   ) ||
-					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "/"    , strtoupper( $status->text )   )
+					$foundw==true
 
 				  ){
 					$h = array();

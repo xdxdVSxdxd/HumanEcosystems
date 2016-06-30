@@ -4,6 +4,12 @@ require_once('db.php');
 require_once('getWords.php');
 
 
+function Slug($string)
+{
+    return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+}
+
+
 $source = "INSTA";
 
 $url = array();
@@ -15,7 +21,7 @@ if($mainLng==999 && $mainLng==999){
 	
 	for($i=0 ; $i<count($words) ; $i++){
 		$qq = "https://api.instagram.com/v1/tags/";
-		$qq = $qq . str_replace(" ", "", $words[$i]["word"]) ;
+		$qq = $qq . Slug(str_replace(" ", "", $words[$i]["word"]) );
 		$qq = $qq . "/media/recent?client_id=" . $in_client_id;
 		$url[] = $qq;
 	}
@@ -29,6 +35,8 @@ if($mainLng==999 && $mainLng==999){
 
 
 for($urlc = 0; $urlc<count($url) ; $urlc++){
+
+	//echo( $url[$urlc] . "<br/>" );
 
 $fc = file_get_contents($url[$urlc]);
 if(isset($fc) && $fc!=""){
@@ -58,25 +66,43 @@ if(isset($fc) && $fc!=""){
 					$h["idw"] = $w["id_word"];
 					$holdFor[] = $h;
 				}
-				else if(  
-
-					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
-					preg_match(   "/" . strtoupper(  "" . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
-					preg_match(   "/\b" . strtoupper(  "" . $w["word"] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  ||
-
-					preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
-					preg_match(   "/" . strtoupper(  " " . $w["word"] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
-					preg_match(   "/\b" . strtoupper(  " " . $w["word"] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  				
+				else {
 
 
-				){
-					$h = array();
-					$h["idc"] = $w["id_class"];
-					$h["idw"] = $w["id_word"];
-					$holdFor[] = $h;
+					$wos =  explode(" ", $w["word"]);
+					$foundw = true;
+					for($i = 0 ; $i<count($wos)&&$foundw;$i++){
+						if(  
+							preg_match(   "/\b" . strtoupper(  "" . $wos[$i] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
+							preg_match(   "/" . strtoupper(  "" . $wos[$i] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
+							preg_match(   "/\b" . strtoupper(  "" . $wos[$i] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  ||
+
+							preg_match(   "/\b" . strtoupper(  " " . $wos[$i] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )   || 
+							preg_match(   "/" . strtoupper(  " " . $wos[$i] ) . "\b/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   ) ||
+							preg_match(   "/\b" . strtoupper(  " " . $wos[$i] ) . "/"    , strtoupper( $js["data"][$i]["caption"]["text"] )   )  	
+
+						){
+							$foundw = true;
+						} else {
+							$foundw = false;
+						}
+					}
+
+					if(  
+
+						$foundw==true
+
+					  ){
+
+						
+						$h = array();
+						$h["idc"] = $w["id_class"];
+						$h["idw"] = $w["id_word"];
+						$holdFor[] = $h;
+					}
 				}
-			}
 
+			}
 
 		}//foreach ($words as $w) {
 

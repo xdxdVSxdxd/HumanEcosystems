@@ -113,7 +113,7 @@
 	        .nodetext{
 	          stroke: none;
 	          fill: rgba(255,0,0,1);
-	          font: 8px Helvetica;
+	          font: 10px Helvetica;
 	        }
 
 	        	#inputbox{
@@ -151,6 +151,9 @@
 				<div class="row">
 					<div class="rowelement" id="theword"></div>
 					<div class="rowelement" id="thestats"></div>
+				</div>
+				<div class="row">
+					<div class="rowelement" id="csv"><a href="javascript:gencsv();">GEN CSV</a></div>
 				</div>
 				<div class="row">
 					<div class="rowelement" id="theconnections"></div>

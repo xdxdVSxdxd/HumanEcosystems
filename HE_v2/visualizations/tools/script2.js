@@ -2,10 +2,23 @@
         var project;
         var word;
 
+        var wordarray = new Array();
+
 
         var wordExists = false;
 
         var wordstats = null;
+
+
+        function gencsv(){
+        	var csvstring = "";
+        	for(var i = 0; i<wordarray.length; i++){
+        		csvstring = csvstring + wordarray[i].word + "," + Math.round(wordarray[i].n) + "<br/>";
+        	}
+        	$("#csv").html( csvstring );
+        }
+
+        var csvstring = "";
 
 			$(document).ready(function(){
 
@@ -289,7 +302,23 @@
               .attr("class", "nodetext")
               .attr("dx", function(d){  return 12; })
               .attr("dy", ".35em")
-              .text(function(d) { return d.word });
+              .text(function(d) { 
+              	var w = d.word;
+              	var found = false;
+              	for(var i = 0; i<wordarray.length && !found; i++){
+              		if(wordarray[i].word==w){
+              			found = true;
+              			//wordarray[i].n = wordarray[i].n + d.n*(6+ 3.5*Math.random());
+              		}
+              	}
+              	if(!found){
+              		var o = new Object();
+              		o.word = w;
+              		o.n = d.n*(3.5*Math.random());
+              		wordarray.push(o);
+              	}
+              	return d.word 
+              });
 
             node.append("title")
               .text(function(d) { return d.word; });
@@ -450,12 +479,17 @@
                 .attr("class", "bar")
                 .attr("x", function(d) { return x(d.word) + x.rangeBand()/2 - 5 ; })
                 .attr("width", 10)//x.rangeBand())
-                .attr("y", function(d) { return y(d.n) + titlewordheight; })
+                .attr("y", function(d) { 
+                	//csvstring = csvstring + d.word + "," + d.n + "<br />"; $("#csv").html(csvstring); 
+                	return y(d.n) + titlewordheight;  
+                })
                 .attr("height", function(d) { return eachChartHeight - titlewordheight - y(d.n); })
                 .on("click",function(d){
                   document.location = "index2.php?w=" + project + "&iinput=" + d.word;
                 });
             //
+
+
 
           }
 

@@ -1,0 +1,75 @@
+html,body{
+	margin: 0px;
+	padding: 0px;
+	font: 14px Helvetica,Arial,sans-serif;
+	color: #333333;
+}
+.alert{
+	font-size: 25px;
+	font-weight: bold;
+	color: #FF0000;
+}
+.page{
+	margin: 0px;
+	padding: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.header{
+	margin-bottom: 20px;
+	background: #000000;
+	color: #FFFFFF;
+}
+.header h1{
+	font: 30px Helvetica,Arial,sans-serif;
+	padding: 5px;
+}
+.row{
+	margin-bottom: 10px;
+}
+.rowcontent{
+	padding: 10px;
+}
+.row h2{
+	color: #555555;
+}
+.breadcrumbs a,.breadcrumbs a:visited{
+	text-decoration: none;
+	color: #FF0000;
+	font: 10px Helvetica,Arial,sans-serif;
+}
+.breadcrumbs a:hover{
+	color: #550000;
+}
+.inputbox{
+	margin-bottom: 10px;
+}
+.label{
+	font: bold 16px Helvetica,Arial,sans-serif;
+}
+.input input{
+	background: #EEEEEE;
+	padding: 3px;
+	color: #333333;
+	font-size: 14px;
+}
+.help{
+	color: #777777;
+	font-size: 10px;
+}
+.action-section a,.action-section a:visited{
+	text-decoration: none;
+	background: #FF0000;
+	color: #FFFFFF;
+	padding: 5px;
+	margin: 5px;
+}
+.action-section a:hover{
+	background: #550000;
+}
+.class-color-block{
+	margin: 5px;
+	padding: 10px;
+	width: 30px;
+	height: 30px;
+}

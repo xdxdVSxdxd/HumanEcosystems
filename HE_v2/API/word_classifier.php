@@ -24,6 +24,9 @@ if($r1){
 
 		$txt1 = strtoupper($txt1);
 
+		$txt1 = str_replace("HTTPS", ' ', $txt1); // remove https
+		$txt1 = str_replace("HTTP", ' ', $txt1); // remove http
+
 		$txt1 = str_replace("\t", ' ', $txt1); // remove tabs
 		$txt1 = str_replace("\n", ' ', $txt1); // remove new lines
 		$txt1 = str_replace("\r", ' ', $txt1); // remove carriage returns

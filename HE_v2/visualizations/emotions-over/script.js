@@ -1,6 +1,6 @@
 // set to false if you don't want the test mode
 // the test mode introduces some random data so that it can show immediate results right away
-var testing = true;
+var testing = false;
 
 var map;
 
@@ -71,7 +71,7 @@ var legend;
             markers = new Array();
 
 		        var mapOptions = {
-              center: new google.maps.LatLng(48.286, 14.283333),
+              center: new google.maps.LatLng(45.464161, 9.190336),
 		          zoom: 13,
 		          mapTypeId: google.maps.MapTypeId.ROADMAP,
 		          backgroundColor: '#EEEEEE',

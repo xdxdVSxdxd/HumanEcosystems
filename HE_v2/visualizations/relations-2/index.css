@@ -1,0 +1,288 @@
+html,body{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	height: 100%;
+	background: #FFFFFF;
+	font-size: 12px;
+	color: #555577;
+}
+
+h1{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 30px;
+	color: #222277;
+}
+
+h2{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 22px;
+	font-style: italic;
+	color: #222277;
+}
+
+h3{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 18px;
+	color: #222277;
+}
+
+#searchbox{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	color: #000000;	
+}
+
+.breadcrumblink, .breadcrumblink:visited{
+	text-decoration: none;
+	color: #000099;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 10px;	
+}
+
+.breadcrumblink:hover{
+	text-decoration: none;
+	color: #990000;
+	font-weight: 900;
+}
+
+.legend {
+    font-size: 12px;
+  }
+
+rect {
+stroke-width: 2;
+}
+
+
+.axisdistribution path,
+.axisdistribution line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+
+.hoverCircle{
+	stroke: #880033;
+  	fill: #880033;
+  	opacity: 0.8;
+}
+
+
+.linkrelationslove{
+stroke: #FF8080;
+}
+
+.linkrelationsanger{
+stroke:#800000;
+}
+
+.linkrelationsdisgust{
+stroke:#800080;
+}
+
+.linkrelationsboredom{
+stroke:#DD00DD;
+}
+
+.linkrelationsfear{
+stroke: #00FF00;
+}
+
+.linkrelationshate{
+stroke: #FF0000;
+}
+
+.linkrelationsjoy{
+stroke: #FFFF00;
+}
+
+.linkrelationssurprise{
+stroke: #0060FF;
+}
+
+.linkrelationstrust{
+stroke: #60FF00;
+}
+
+.linkrelationssadness{
+stroke: #0000FF;
+}
+
+.linkrelationsanticipation{
+stroke: #FF8000;
+}
+
+.linkrelationsviolence{
+stroke: #FF4000;
+}
+
+.linkrelationsterror{
+stroke: #008000;
+}
+
+.linkrelations {
+  stroke: #ccc;
+}
+
+.linkrelationsbad {
+  stroke: #FF0000;
+}
+
+.linkexplore{
+	stroke: #333;
+}
+
+
+.circleexplore{
+	stroke: #330033;
+  	fill: #330033;
+  	opacity: 1;
+}
+
+.nodetextexplore{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 10px;
+}
+
+.noderelations:not(:hover) .nodetextrelations {
+  display: none;
+}
+
+.circlerelationsnode{
+	stroke: #555555;
+  	fill: #555555;
+  	opacity: 0.7;
+}
+
+.dotdistribution {
+  stroke: #000;
+  fill: #AAA;
+  opacity: 0.8;
+}
+
+
+.lineTimelines {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+.areaTimelines {
+  fill: #e7e7e7;
+}
+
+
+svg {
+  padding: 10px 0 0 10px;
+}
+
+.arcemotionswords {
+  stroke: #fff;
+}
+
+
+.normaltext{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+
+.boldtext{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+}
+
+.lighttext{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+.superlighttext{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+}
+
+.large{
+	font-size: 18px;
+}
+
+.mrighttext{
+	margin-right: 5px;
+}
+
+.browselink, .browselink:visited{
+	text-decoration: none;
+	color: #000099;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 13px;	
+}
+
+.browselink:hover{
+	text-decoration: none;
+	color: #990000;
+	font-weight: 900;
+}
+
+.smallpielabel{
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+}
+
+.padded{
+	padding: 20px;
+}
+
+.headerpad{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF FOUR  */
+.span_4_of_4 {
+	width: 100%;
+}
+.span_3_of_4 {
+	width: 74.6%;
+}
+.span_2_of_4 {
+	width: 49.2%;
+}
+.span_1_of_4 {
+	width: 23.8%;
+}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 1% 0 1% 0%; }
+	.span_1_of_4, .span_2_of_4, .span_3_of_4, .span_4_of_4 { width: 100%; }
+}

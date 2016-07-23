@@ -22,12 +22,12 @@ $( document ).ready(function() {
 
 
 		var crons = "";
-		crons = crons + "*/3 * * * * /usr/bin/wget " + serverUrl + "API/getTwitter.php?w=" + selectedName + " >/dev/null 2>&1\n";
-		crons = crons + "*/15 * * * * /usr/bin/wget " + serverUrl + "API/word_classifier.php?w=" + selectedName + " >/dev/null 2>&1\n";
-		crons = crons + "*/42 * * * * /usr/bin/wget " + serverUrl + "API/getTwitter_from_users.php?w=" + selectedName + " >/dev/null 2>&1\n";
-		crons = crons + "*/9 * * * * /usr/bin/wget " + serverUrl + "API/emotioner.php?w=" + selectedName + " >/dev/null 2>&1\n";
-		crons = crons + "*/4 * * * * /usr/bin/wget " + serverUrl + "API/getInstagram.php?w=" + selectedName + " >/dev/null 2>&1\n";
-		crons = crons + "*/5 * * * * /usr/bin/wget " + serverUrl + "API/relationer.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/3 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/getTwitter.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/15 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/word_classifier.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/42 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/getTwitter_from_users.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/9 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/emotioner.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/4 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/getInstagram.php?w=" + selectedName + " >/dev/null 2>&1\n";
+		crons = crons + "*/5 * * * * /usr/bin/wget  -O /dev/null -q " + serverUrl + "API/relationer.php?w=" + selectedName + " >/dev/null 2>&1\n";
 
 		$("#cronjobsdetails pre").text( crons );
 

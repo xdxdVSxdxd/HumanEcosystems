@@ -51,7 +51,6 @@ function getrelations(){
 
     d3.json("../../API/tools-getRelations.php?w=" + project, function(json) {
 
-      
     var force = d3.layout.force()
         .nodes(json.nodes)
         .links(json.links)

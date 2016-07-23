@@ -41,7 +41,7 @@ function findUser($un,$dbh){
 
 
 
-		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u, content c WHERE c.research='" . $research_code . "' AND u.nick=c.nick ORDER BY id DESC";
+		$q1 = "SELECT DISTINCT u.id as id, u.nick as nick, u.profile_url as pu FROM users u, content c WHERE c.research='" . $research_code . "' AND u.nick=c.nick ORDER BY id DESC LIMIT 0,2000";
 
 		$r1 = $dbh->query($q1);
 		if($r1){

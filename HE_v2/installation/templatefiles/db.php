@@ -4,7 +4,7 @@ require_once("parameter-parser.php");
 
 try {
   $dbh = new PDO(
-  					'mysql:host=[HE_DB_HOST];dbname=[HE_DB_NAME]', 
+  					'mysql:host=[HE_DB_HOST];dbname=[HE_DB_NAME];charset=utf8', 
   					'[HE_DB_USER]', 
   					'[HE_DB_PASSWORD]', 
       				array(PDO::ATTR_PERSISTENT => true)

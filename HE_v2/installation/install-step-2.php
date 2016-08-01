@@ -151,7 +151,7 @@
 	}
 
 	if($success){
-
+    
 		// replace su db.php in API con i parametri del db
 		$parametersfile = file_get_contents("../API/db.php");
 
